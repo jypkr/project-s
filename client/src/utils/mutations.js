@@ -1,18 +1,18 @@
 import { gql } from '@apollo/client'
 
 export const ADD_POST = gql`
-  mutation addPost($text: String!, $title: String!, $text: String!) {
-    addPost(text: $text,  title: $title) {
+  mutation addPost($body: String!, $title: String!) {
+    addPost(body: $body,  title: $title) {
       _id
-      text
+      body
       title
     }
   }
 `
 
 export const UPDATE_POST = gql`
-  mutation updatePost($_id: ID!, $title: String!, $text: String!) {
-    updatePost(_id: $_id,  title: $title, text: $text) {
+  mutation updatePost($_id: ID!, $title: String!, $body: String!) {
+    updatePost(_id: $_id,  title: $title, body: $body) {
       _id
     }
   }
@@ -36,8 +36,8 @@ export const LOGIN_USER = gql`
         email
         posts {
           _id
-          text
           title
+          body
         }
       }
     }

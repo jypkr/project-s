@@ -10,8 +10,8 @@ export const reducer = (state, action) => {
     case ADD_POST:
       return {
         ...state,
-        posts: [...state.items, action.item],
-        text: '',
+        posts: [...state.posts, action.post],
+        body: '',
         title: ''
       }
     case UPDATE_POST:
@@ -19,7 +19,7 @@ export const reducer = (state, action) => {
       posts = posts.map(post => {
         if (post._id === action._id) {
           post.title = action.title
-          post.text = action.title
+          post.body = action.body
         }
         return post
       })
@@ -35,7 +35,7 @@ export const reducer = (state, action) => {
     case UPDATE_TEXT:
       return {
         ...state,
-        text: action.text
+        text: action.body
       }
     case UPDATE_TITLE:
       return {
