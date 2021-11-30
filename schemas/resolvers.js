@@ -9,7 +9,8 @@ const resolvers = {
   },
   Mutation: {
     addPost: async (parent, item) => await Post.create(post),
-    deleteItem: async (parent, { _id }) => await Post.findByIdAndDelete(_id),
+    updatePost: async (parent,post) => await Post.findByIdAndUpdate(_id,{$set:{title,text}}),
+    deletePost: async (parent, { _id }) => await Post.findByIdAndDelete(_id),
     register: async (parent, data) => {
       const user = await User.create(data)
       const token = signToken(user._id)
