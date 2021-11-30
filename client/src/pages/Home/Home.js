@@ -9,7 +9,7 @@ const Home = () =>{
   const [state, dispatch] = useStoreContext()
   const { loading, data } = useQuery(QUERY_POSTS)
 
-  const [addItem] = useMutation(ADD_POST)
+  const [addPost] = useMutation(ADD_POST)
   const [updatePost] = useMutation(UPDATE_POST)
   const [deletePost] = useMutation(DELETE_POST)
 
@@ -22,16 +22,16 @@ const Home = () =>{
   const handleAddPost = async event => {
     event.preventDefault()
     const post = {
-      text: state.text,
+      body: state.body,
       title: 'test'
     }
 
     try {
-      const { data } = await addItem({
+      const { data } = await addPost({
         variables: post
       })
       dispatch({
-        type: 'ADD_ITEM',
+        type: 'ADD_POST',
         post
       })
     } catch (err) {
@@ -53,11 +53,11 @@ const Home = () =>{
       <h1>The Home Page</h1>
       <form>
         <p>
-          <label htmlFor='text'>item</label>
+          <label htmlFor='body'>body</label>
           <input
             type='text'
-            name='text'
-            value={state.text}
+            name='body'
+            value={state.body}
             onChange={handleInputChange}
           />
         </p>
@@ -70,7 +70,7 @@ const Home = () =>{
           state.posts.map(post => (
             <li>
             <h1>{post.title}</h1>
-            <p>{post.text}</p>
+              <p>{post.body}</p>
             </li>
           ))
         )

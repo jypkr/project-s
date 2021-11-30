@@ -9,7 +9,7 @@ const resolvers = {
   },
   Mutation: {
     addPost: async (parent, item) => await Post.create(post),
-    updatePost: async (parent,post) => await Post.findByIdAndUpdate(_id,{$set:{title,text}}),
+    updatePost: async (parent, post) => await Post.findByIdAndUpdate(_id, { $set: { title, body}}),
     deletePost: async (parent, { _id }) => await Post.findByIdAndDelete(_id),
     register: async (parent, data) => {
       const user = await User.create(data)
@@ -18,6 +18,7 @@ const resolvers = {
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email }).populate('posts')
+      console.log(user)
       if (user) {
         const correct = await user.isCorrectPassword(password)
         if (correct) {
