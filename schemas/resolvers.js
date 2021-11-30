@@ -9,7 +9,7 @@ const resolvers = {
   },
   Mutation: {
     addPost: async (parent, item) => await Post.create(post),
-    updatePost: async (parent, post) => await Post.findByIdAndUpdate(_id, { $set: { title, body}}),
+    updatePost: async (parent, { _id, title, body }) => await Post.findByIdAndUpdate(_id, { $set: { title, body}}),
     deletePost: async (parent, { _id }) => await Post.findByIdAndDelete(_id),
     register: async (parent, data) => {
       const user = await User.create(data)
@@ -26,6 +26,17 @@ const resolvers = {
           return { token, user }
         }
       }
+    },
+    sendFriendRequest: async (parent, {sentTo_id, sentBy_id}) => await User.findByIdAndUpdate(sentTo_id, { $push: { friendRequests: user_id, sentBy_id }}),
+    acceptFriendRequest: async (parent, { sentBy_id, sentTo_id }) => {
+      await User.findByIdAndUpdate(sentTo_id, { $push: { friends: sentBy_id }})
+      await User.findByIdAndUpdate(sentBy_id, { $push: { friends: sentTo_id }})
+      await User.findByIdAndUpdate(sentTo_id, { $pull: { friendRequests: sentBy_id }})
+    },
+    denyFriendRequest: async (parent, { sentBy_id, sentTo_id }) => await User.findByIdAndUpdate(sentTo_id, { $pull: { friendRequests: sentBy_Id }}),
+    deleteFriend: async (parent, { user1_id, user2_id }) => {
+      await User.findByIdAndUpdate(user1_id, { $pull: { friends: user2_id }})
+      await User.findByIdAndUpdate(user2_id, { $pull: { friends: user1_id }})
     }
   }
 }
