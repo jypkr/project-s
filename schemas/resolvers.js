@@ -17,7 +17,7 @@ const resolvers = {
       return { token, user }
     },
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email }).populate('items')
+      const user = await User.findOne({ email }).populate('posts')
       if (user) {
         const correct = await user.isCorrectPassword(password)
         if (correct) {

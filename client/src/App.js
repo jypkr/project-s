@@ -20,10 +20,10 @@ const App = () => {
         <div>
           <StoreProvider>
             <Switch>
-              <Route exact path='/'>
+              <Route exact path='/home'>
                 <Home />
               </Route>
-              <Route path='/login'>
+              <Route path='/'>
                 <Auth />
               </Route>
             </Switch>

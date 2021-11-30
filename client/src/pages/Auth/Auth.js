@@ -27,7 +27,7 @@ const Auth = () => {
         password: authState.password
       }
     })
-
+    console.log(token)
     AuthService.login(token)
   }
 
@@ -39,6 +39,7 @@ const Auth = () => {
         password: authState.lPassword
       }
     })
+    console.log(token)
 
     AuthService.login(token)
   }
