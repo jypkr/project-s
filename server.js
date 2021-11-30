@@ -2,36 +2,23 @@ require('dotenv').config()
 
 const express = require('express')
 const { join } = require('path')
-const passport = require('passport')
-const { Strategy: LocalStrategy } = require('passport-local')
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
-
-
-const { User } = require('./models')
 const syncDB = require('./db')
 
+const { ApolloServer } = require('apollo-server-express')
+const { typeDefs, resolvers } = require('./schemas')
+
 const app = express()
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	context: require('./utils/auth.js').authMiddleware
+})
+
+server.applyMiddleware({ app })
 
 app.use(express.static(join(__dirname, 'client', 'build')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
-app.use(passport.initialize())
-app.use(passport.session())
-
-passport.use(new LocalStrategy(User.authenticate()))
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
-
-passport.use(new JwtStrategy({
-	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-	secretOrKey: process.env.SECRET
-}, ({ id }, cb) => User.findById(id)
-	.populate('historys')
-	.then(user => cb(null, user))
-	.catch(err => cb(err))))
-
-app.use(require('./routes'))
 
 app.get('*', (req, res) => {
 	res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
