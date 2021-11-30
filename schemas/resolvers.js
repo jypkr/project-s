@@ -8,8 +8,8 @@ const resolvers = {
     post: async (parent, { _id }) => await Post.findById(_id)
   },
   Mutation: {
-    addPost: async (parent, item) => await Post.create(post),
-    updatePost: async (parent, { _id, title, body }) => await Post.findByIdAndUpdate(_id, { $set: { title, body}}),
+    addPost: async (parent, post) => await Post.create(post),
+    updatePost: async (parent, post) => await Post.findByIdAndUpdate(_id, { $set: { title, body}}),
     deletePost: async (parent, { _id }) => await Post.findByIdAndDelete(_id),
     register: async (parent, data) => {
       const user = await User.create(data)

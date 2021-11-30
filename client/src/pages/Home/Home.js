@@ -5,7 +5,7 @@ import { QUERY_POSTS } from '../../utils/queries.js'
 import { ADD_POST, UPDATE_POST, DELETE_POST } from '../../utils/mutations'
 
 
-const Home = () =>{
+const Home = () => {
   const [state, dispatch] = useStoreContext()
   const { loading, data } = useQuery(QUERY_POSTS)
 
@@ -47,7 +47,7 @@ const Home = () =>{
         posts: data.posts
       })
     }
-  }, [data]) 
+  }, [data])
   return (
     <>
       <h1>The Home Page</h1>
@@ -69,7 +69,7 @@ const Home = () =>{
         ) : (
           state.posts.map(post => (
             <li>
-            <h1>{post.title}</h1>
+              <h1>{post.title}</h1>
               <p>{post.body}</p>
             </li>
           ))

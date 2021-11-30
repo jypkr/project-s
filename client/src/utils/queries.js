@@ -2,10 +2,10 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS = gql`
   query {
-    POSTS {
+    posts {
       _id
-      body
       title
+      body    
     }
   }
 `
