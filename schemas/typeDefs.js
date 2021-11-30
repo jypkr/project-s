@@ -26,6 +26,10 @@ const typeDefs = gql`
     deletePost(_id: ID!): Post
     register(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    sendFriendRequest(sentTo_id: ID!, sentBy_id: ID!): User
+    acceptFriendRequest(sentBy_id: ID!, sentTo_id: ID!): User
+    denyFriendRequest(sentBy_id: ID!, sentTo_id: ID!): User
+    deleteFriend(user1_id: ID!, user2_id: ID!): User
   }
 `
 
