@@ -13,17 +13,33 @@ const Home = () => {
   const [updatePost] = useMutation(UPDATE_POST)
   const [deletePost] = useMutation(DELETE_POST)
 
-  const handleInputChange = ({ target: { value } }) => dispatch({
-    type: 'UPDATE_TEXT',
-    text: value
-  })
+  const handleInputChange = ({ target }) => {
+    switch (target.name) {
+      case 'title':
+        dispatch({
+          type: 'UPDATE_TITLE',
+          title: target.value
+        })
+        break
+      case 'body':
+        dispatch({
+          type: 'UPDATE_BODY',
+          body: target.value
+        })
+        break
+      default:
+        break
+    }
+  }
+
+
 
 
   const handleAddPost = async event => {
     event.preventDefault()
     const post = {
-      body: state.body,
-      title: 'test'
+      title: state.title,
+      body: state.body
     }
 
     try {
@@ -52,6 +68,15 @@ const Home = () => {
     <>
       <h1>The Home Page</h1>
       <form>
+        <p>
+          <label htmlFor='title'>title</label>
+          <input
+            type='text'
+            name='title'
+            value={state.title}
+            onChange={handleInputChange}
+          />
+        </p>
         <p>
           <label htmlFor='body'>body</label>
           <input
