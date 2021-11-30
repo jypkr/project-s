@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { GET_POSTS, ADD_POST, UPDATE_POST,UPDATE_TEXT, UPDATE_TITLE, DELETE_POST } from './action.js'
+import { GET_POSTS, ADD_POST, UPDATE_POST,UPDATE_BODY, UPDATE_TITLE, DELETE_POST } from './action.js'
 export const reducer = (state, action) => {
   switch (action.type) {
     case GET_POSTS:
@@ -11,8 +11,8 @@ export const reducer = (state, action) => {
       return {
         ...state,
         posts: [...state.posts, action.post],
-        body: '',
-        title: ''
+        title: '',
+        body: ''
       }
     case UPDATE_POST:
       let posts = JSON.parse(JSON.stringify(state.posts))
@@ -32,10 +32,10 @@ export const reducer = (state, action) => {
         ...state,
         posts: state.posts.filter(post => post._id !== action._id)
       }
-    case UPDATE_TEXT:
+    case UPDATE_BODY:
       return {
         ...state,
-        text: action.body
+        body: action.body
       }
     case UPDATE_TITLE:
       return {
