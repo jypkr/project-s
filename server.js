@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const express = require('express')
 const { join } = require('path')
 const syncDB = require('./db')
@@ -8,6 +7,7 @@ const { ApolloServer } = require('apollo-server-express')
 const { typeDefs, resolvers } = require('./schemas')
 
 const app = express()
+
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
