@@ -8,7 +8,15 @@ const User = new Schema({
   posts: [{
     type: Schema.Types.ObjectId,
     ref: 'Post'
-  }]
+  }],
+  friends: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  friendRequests: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
 })
 
 User.pre('save', async function (next) {
