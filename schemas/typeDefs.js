@@ -1,10 +1,21 @@
 const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
+  type Likes {
+    count: Number!
+    likedBy: [ID!]
+  }
+  type Dislikes {
+    count: Number!
+    likedBy: [ID!]
+  }
   type Post {
     _id: ID!
     title: String!
     body: String!
+    imageUrl: String!
+    likes: [Likes!]
+    dislikes: [Dislikes]
   }
   type User {
     _id: ID!

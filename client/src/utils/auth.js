@@ -24,6 +24,7 @@ const AuthService = {
   logout() {
     localStorage.removeItem('token')
   }
+  
 }
 
 export default AuthService
