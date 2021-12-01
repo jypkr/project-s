@@ -19,11 +19,13 @@ const AuthService = {
   },
   login(token) {
     localStorage.setItem('token', token)
+
     
   },
   logout() {
     localStorage.removeItem('token')
   }
+  
 }
 
 export default AuthService
