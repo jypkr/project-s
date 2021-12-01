@@ -40,6 +40,7 @@ const Auth = () => {
     
     
     AuthService.login(token)
+    
   }
 
   return (

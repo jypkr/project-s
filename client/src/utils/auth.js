@@ -19,8 +19,7 @@ const AuthService = {
   },
   login(token) {
     localStorage.setItem('token', token)
-
-    
+    window.location = "/home"
   },
   logout() {
     localStorage.removeItem('token')
