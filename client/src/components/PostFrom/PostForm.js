@@ -158,6 +158,7 @@ const PostForm = () => {
                         body={post.body}
                         image={post.image}
                         posted={post.posted}
+                        id = {post._id}
                       >
 
                       </PostCard>

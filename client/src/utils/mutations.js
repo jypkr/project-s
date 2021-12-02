@@ -57,6 +57,14 @@ export const REGISTER_USER = gql`
         _id
         name
         email
+        posts {
+          _id
+          hide
+          title
+          body
+          image
+          posted
+        }
       }
     }
   }
