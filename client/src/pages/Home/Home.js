@@ -1,5 +1,6 @@
 
 import PostForm from '../../components/PostFrom'
+import LogoutForm from '../../components/LogoutForm'
 
 const Home = () => {
  
@@ -10,6 +11,7 @@ const Home = () => {
     <>
       <h1>The Home Page</h1>
       <PostForm></PostForm>
+      <LogoutForm></LogoutForm>
       </>
 
   )
