@@ -9,3 +9,5 @@ export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_TITLE = 'UPDATE_TITLE'
 
 export const UPDATE_BODY= 'UPDATE_BODY'
+
+export const UPDATE_IMAGE= 'UPDATE_IMAGE'

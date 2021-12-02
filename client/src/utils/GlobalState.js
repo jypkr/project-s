@@ -9,7 +9,8 @@ const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useItemReducer({
     posts: [],
     title:'',
-    body: ''
+    body: '',
+    image:''
     
   })
   return <Provider value={[state, dispatch]} {...props} />
