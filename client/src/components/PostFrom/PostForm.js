@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import { SettingsInputAntennaTwoTone } from '@mui/icons-material'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -63,7 +64,32 @@ const PostForm = () => {
   }
 
 
+  const handleDeletePost = async ( id) =>{
+    
+    const post = {
+      _id:id
+    }
 
+    try {
+      const { data } = await deletePost({
+        variables: post
+      })
+      dispatch({
+        type: 'DELETE_POST',
+        post
+      })
+      console.log(data)
+      
+
+     
+
+      
+
+    } catch (err) {
+      console.error(err)
+      console.log(post)
+    }
+  }
 
   const handleAddPost = async event => {
     event.preventDefault()
@@ -158,7 +184,8 @@ const PostForm = () => {
                         body={post.body}
                         image={post.image}
                         posted={post.posted}
-                        id = {post._id}
+                        _id = {post._id}
+                        handleDeletePost = {handleDeletePost}
                       >
 
                       </PostCard>

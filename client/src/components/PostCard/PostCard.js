@@ -6,8 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const PostCard= ({title,body, image, posted,id }) =>{
-
+const PostCard = ({ title, body, image, posted, _id, handleDeletePost }) =>{
+console.log(_id)
   const handleLike=()=>{
   console.log('like button clicked')
   console.log(title)
@@ -33,6 +33,7 @@ const PostCard= ({title,body, image, posted,id }) =>{
           >
           <Typography  gutterBottom variant="h5" component="div">
             {title}
+            {_id}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {body}
@@ -44,6 +45,8 @@ const PostCard= ({title,body, image, posted,id }) =>{
           >Like</Button>
           <Button size="small"
             onClick={() => handleDislike()}>Dislike</Button>
+          <Button size="small"
+            onClick={() => handleDeletePost(_id)}>Delete</Button>
          
         </CardActions>
       </Card>
