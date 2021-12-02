@@ -30,17 +30,24 @@ const Auth = () => {
   }
 
   const handleLoginUser = async event => {
-    event.preventDefault()
-    const { data: { login: { token } } } = await login({
-      variables: {
-        email: authState.lEmail,
-        password: authState.lPassword
-      }
-    })
-    
-    
-    AuthService.login(token)
-    
+    // Need more function for validation
+    if (authState.lEmail === "" || authState.lPassword === "") 
+    {
+      event.preventDefault()
+      alert("enter email or pwd")
+    }
+    else 
+    {
+      event.preventDefault()
+      const { data: { login: { token, user } } } = await login({
+        variables: {
+          email: authState.lEmail,
+          password: authState.lPassword
+        }
+      })
+
+      AuthService.login(token, user)
+    }
   }
 
   return (
