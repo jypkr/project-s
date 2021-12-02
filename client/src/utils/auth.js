@@ -22,9 +22,11 @@ const AuthService = {
     window.location = "/home"
   },
   logout() {
+    console.log("logout")
     localStorage.removeItem('token')
+    window.location = "/auth"
   }
-  
+
 }
 
 export default AuthService
