@@ -33,9 +33,19 @@ export const reducer = (state, action) => {
         posts
       }
     case DELETE_POST:
+      let array=[]
+      state.posts.forEach(post => {
+        console.log(post._id)
+        console.log(action.post._id)
+        if(!(post._id ===action.post._id)){
+          array.push(post)
+        }
+        
+      });
+      
       return {
         ...state,
-        posts: state.posts.filter(post => post._id !== action._id)
+        posts: [...array]
       }
     case UPDATE_BODY:
       return {
