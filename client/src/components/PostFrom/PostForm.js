@@ -4,10 +4,22 @@ import { useState, useEffect } from 'react'
 import { useStoreContext } from '../../utils/GlobalState.js'
 import { QUERY_POSTS } from '../../utils/queries.js'
 import { ADD_POST, UPDATE_POST, DELETE_POST } from '../../utils/mutations'
+import PostCard from '../PostCard'
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
-
-const PostForm = () =>{
+const PostForm = () => {
   const [state, dispatch] = useStoreContext()
   const { loading, data } = useQuery(QUERY_POSTS)
 
@@ -72,7 +84,7 @@ const PostForm = () =>{
         type: 'ADD_POST',
         post
       })
-      
+
     } catch (err) {
       console.error(err)
       console.log(post)
@@ -81,50 +93,88 @@ const PostForm = () =>{
 
   return (
     <>
-      <form>
-        <p>
-          <label htmlFor='title'>title</label>
-          <input
-            type='text'
-            name='title'
-            value={state.title}
-            onChange={handleInputChange}
-          />
-        </p>
-        <p>
-          <label htmlFor='body'>body</label>
-          <input
-            type='text'
-            name='body'
-            value={state.body}
-            onChange={handleInputChange}
-          />
-        </p>
-        <p>
-          <label htmlFor='image'>Image url</label>
-          <input
-            type='text'
-            name='image'
-            value={state.image}
-            onChange={handleInputChange}
-          />
-        </p>
-        <button onClick={handleAddPost}>Add Post</button>
-      </form>
-      {
-        loading ? (
-          <span>loading... please wait</span>
-        ) : (
-          state.posts.map(post => (
-            <li>
-              <h1>{post.title}</h1>
-              <p>{post.body}</p>
-              <p>{post.image}</p>
-              <p>{post.posted}</p>
-            </li>
-          ))
-        )
-      }
+
+      <Box
+        sx={{ flexGrow: 1 }}>
+        <Grid
+
+          container
+          direction='column'
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+
+        >
+          <Grid item xs={12}>
+            <Stack
+              pb={4}
+              spacing={2}
+            >
+
+              <TextField
+                id="outlined-textarea"
+                label="title"
+                placeholder="title"
+                value={state.title}
+                name='title'
+                onChange={handleInputChange}
+
+                multiline
+              />
+              <TextField
+                id="outlined-textarea"
+                label="body"
+                placeholder="body"
+                value={state.body}
+                name='body'
+                onChange={handleInputChange}
+                rows={4}
+                multiline
+              />
+              <TextField
+                id="outlined-textarea"
+                label="image"
+                placeholder="image"
+                value={state.image}
+                name='image'
+                onChange={handleInputChange}
+
+                multiline
+              />
+
+              <button onClick={handleAddPost}>Add Post</button>
+
+
+            </Stack>
+            <Grid item xs={12}>
+              <Item>
+                {
+                  loading ? (
+                    <span>loading... please wait</span>
+                  ) : (
+                    state.posts.map(post => (
+                      <PostCard
+                        title={post.title}
+                        body={post.body}
+                        image={post.image}
+                        posted={post.posted}
+                      >
+
+                      </PostCard>
+
+                    ))
+                  )
+                }
+              </Item>
+            </Grid>
+          </Grid>
+
+
+
+        </Grid>
+
+      </Box>
+
     </>
   )
 }
