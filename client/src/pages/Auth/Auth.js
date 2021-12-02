@@ -39,14 +39,14 @@ const Auth = () => {
     else 
     {
       event.preventDefault()
-      const { data: { login: { token } } } = await login({
+      const { data: { login: { token, user } } } = await login({
         variables: {
           email: authState.lEmail,
           password: authState.lPassword
         }
       })
 
-      AuthService.login(token)
+      AuthService.login(token, user)
     }
   }
 
