@@ -1,10 +1,11 @@
 const { model, Schema } = require('mongoose')
 
 const Post = new Schema({
-  hide: Boolean,
+  hide: {type:Boolean, default: false},
   title: String,
   body: String,
-  imageUrl: String,
+  image: String,
+  postedDate: String,
   likes: {
     count: Number,
     likedBy: [
@@ -21,8 +22,8 @@ const Post = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  },
-  postedDate: { type: Date, default: Date.now }
+  }
+  
 })
 
 module.exports = model('Post', Post)

@@ -16,7 +16,14 @@ const PostForm = () =>{
   const [deletePost] = useMutation(DELETE_POST)
 
 
-
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: 'GET_POSTS',
+        posts: data.posts
+      })
+    }
+  }, [data])
 
   const handleInputChange = ({ target }) => {
     switch (target.name) {
@@ -32,6 +39,12 @@ const PostForm = () =>{
           body: target.value
         })
         break
+      case 'image':
+        dispatch({
+          type: 'UPDATE_IMAGE',
+          image: target.value
+        })
+        break
       default:
         break
     }
@@ -42,11 +55,13 @@ const PostForm = () =>{
 
   const handleAddPost = async event => {
     event.preventDefault()
-    let date = String(Date.now())
+    let postedDate = String(Date.now())
+    console.log(state.image)
     const post = {
       title: state.title,
       body: state.body,
-      postedDate: date
+      image: state.image,
+      postedDate: postedDate
     }
 
     try {
@@ -59,6 +74,7 @@ const PostForm = () =>{
       })
     } catch (err) {
       console.error(err)
+      console.log(post)
     }
   }
 
@@ -83,6 +99,15 @@ const PostForm = () =>{
             onChange={handleInputChange}
           />
         </p>
+        <p>
+          <label htmlFor='image'>Image</label>
+          <input
+            type='text'
+            name='image'
+            value={state.image}
+            onChange={handleInputChange}
+          />
+        </p>
         <button onClick={handleAddPost}>Add Post</button>
       </form>
       {
@@ -93,6 +118,7 @@ const PostForm = () =>{
             <li>
               <h1>{post.title}</h1>
               <p>{post.body}</p>
+              <p>{post.imageUrl}</p>
             </li>
           ))
         )

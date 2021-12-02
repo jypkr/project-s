@@ -1,6 +1,7 @@
 import { useReducer } from 'react'
-import { GET_POSTS, ADD_POST, UPDATE_POST,UPDATE_BODY, UPDATE_TITLE, DELETE_POST } from './action.js'
+import { GET_POSTS, ADD_POST, UPDATE_POST,UPDATE_BODY, UPDATE_TITLE, DELETE_POST, UPDATE_IMAGE } from './action.js'
 export const reducer = (state, action) => {
+  console.log(action)
   switch (action.type) {
     case GET_POSTS:
       return {
@@ -12,7 +13,8 @@ export const reducer = (state, action) => {
         ...state,
         posts: [...state.posts, action.post],
         title: '',
-        body: ''
+        body: '',
+        image: ''
       }
     case UPDATE_POST:
       let posts = JSON.parse(JSON.stringify(state.posts))
@@ -20,6 +22,7 @@ export const reducer = (state, action) => {
         if (post._id === action._id) {
           post.title = action.title
           post.body = action.body
+          post.image= action.image
         }
         return post
       })
@@ -41,6 +44,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         title: action.title
+      }
+    case UPDATE_IMAGE:
+      return {
+        ...state,
+        image: action.image
       }
     default:
       return state
