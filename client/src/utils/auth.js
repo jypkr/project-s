@@ -17,8 +17,12 @@ const AuthService = {
       return false
     }
   },
-  login(token) {
+  login(token, user) {
     localStorage.setItem('token', token)
+    localStorage.setItem('name', user.name)
+    localStorage.setItem('email', user.email)
+    localStorage.setItem('profile', user.profile)
+
     window.location = "/home"
   },
   logout() {
