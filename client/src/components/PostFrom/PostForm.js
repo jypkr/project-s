@@ -55,13 +55,13 @@ const PostForm = () =>{
 
   const handleAddPost = async event => {
     event.preventDefault()
-    let postedDate = String(Date.now())
+    let posted = String(Date.now())
     console.log(state.image)
     const post = {
       title: state.title,
       body: state.body,
       image: state.image,
-      postedDate: postedDate
+      posted: posted
     }
 
     try {
@@ -72,6 +72,7 @@ const PostForm = () =>{
         type: 'ADD_POST',
         post
       })
+      
     } catch (err) {
       console.error(err)
       console.log(post)
@@ -100,7 +101,7 @@ const PostForm = () =>{
           />
         </p>
         <p>
-          <label htmlFor='image'>Image</label>
+          <label htmlFor='image'>Image url</label>
           <input
             type='text'
             name='image'
@@ -118,7 +119,8 @@ const PostForm = () =>{
             <li>
               <h1>{post.title}</h1>
               <p>{post.body}</p>
-              <p>{post.imageUrl}</p>
+              <p>{post.image}</p>
+              <p>{post.posted}</p>
             </li>
           ))
         )

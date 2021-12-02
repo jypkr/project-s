@@ -5,7 +5,7 @@ const Post = new Schema({
   title: String,
   body: String,
   image: String,
-  postedDate: String,
+  posted: String,
   likes: {
     count: Number,
     likedBy: [
@@ -18,7 +18,6 @@ const Post = new Schema({
       { _id: Schema.Types.ObjectId }
     ]
   },
-
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

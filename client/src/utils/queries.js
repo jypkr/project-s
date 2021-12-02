@@ -5,7 +5,10 @@ export const QUERY_POSTS = gql`
     posts {
       _id
       title
-      body    
+      body
+      image
+      posted
+       
     }
   }
 `

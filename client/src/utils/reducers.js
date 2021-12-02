@@ -9,6 +9,7 @@ export const reducer = (state, action) => {
         posts: action.posts
       }
     case ADD_POST:
+      console.log(action.post)
       return {
         ...state,
         posts: [...state.posts, action.post],
@@ -23,6 +24,7 @@ export const reducer = (state, action) => {
           post.title = action.title
           post.body = action.body
           post.image= action.image
+          
         }
         return post
       })
