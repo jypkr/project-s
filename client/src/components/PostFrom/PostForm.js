@@ -140,7 +140,8 @@ const PostForm = () => {
       title:'title',
       body:'body',
       image: 'image',
-      likedBy:[]
+      likedBy:[],
+      dislikedBy: []
     }
     state.posts.forEach(element=>{
       if(element._id===post._id)
@@ -148,7 +149,8 @@ const PostForm = () => {
         post.title=element.title
         post.body = element.body
         post.image = element.image 
-        post.likedBy= [...element.likedBy, userID]
+        post.likedBy= [...element.likedBy,userID]
+        post.dislikedBy = [...element.dislikedBy]
       }
     })
 
@@ -169,8 +171,40 @@ const PostForm = () => {
 
 
   }
-  const handleDislike = (_id) => {
-    console.log('dislike button clicked')
+  const handleDislike =async (_id) => {
+    //Need to get UserId
+    let userID = localStorage.getItem('userId')
+    let post = {
+      _id: _id,
+      title: 'title',
+      body: 'body',
+      image: 'image',
+      likedBy: [],
+      dislikedBy:[]
+    }
+    state.posts.forEach(element => {
+      if (element._id === post._id) {
+        post.title = element.title
+        post.body = element.body
+        post.image = element.image
+        post.likedBy = [...element.likedBy]
+        post.dislikedBy= [...element.dislikedBy, userID]
+      }
+    })
+
+    try {
+      const { data } = await updatePost({
+        variables: post
+      })
+      dispatch({
+        type: 'UPDATE_POST',
+        post
+      })
+    }
+    catch (err) {
+      console.error(err)
+
+    }
 
   }
 
@@ -243,6 +277,7 @@ const PostForm = () => {
                         posted={post.posted}
                         _id = {post._id}
                         likedBy={post.likedBy}
+                        dislikedBy = {post.dislikedBy}
                         handleLike={handleLike}
                         handleDislike={handleDislike}
                         handleDeletePost = {handleDeletePost}

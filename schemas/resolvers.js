@@ -9,7 +9,7 @@ const resolvers = {
   },
   Mutation: {
     addPost: async (parent, post) => await Post.create(post),
-    updatePost: async (parent, post) => await Post.findByIdAndUpdate(post._id, { $set: {title: post.title, body:post.body, image:post.image, likedBy: post.likedBy}}),
+    updatePost: async (parent, post) => await Post.findByIdAndUpdate(post._id, { $set: {title: post.title, body:post.body, image:post.image, likedBy: post.likedBy, dislikedBy: post.dislikedBy}}),
     deletePost: async (parent, { _id }) => await Post.findByIdAndDelete(_id),
     register: async (parent, data) => {
       const user = await User.create(data)

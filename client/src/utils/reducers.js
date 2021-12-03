@@ -33,7 +33,7 @@ export const reducer = (state, action) => {
           post.body = action.post.body
           post.image= action.post.image
           post.likedBy = action.post.likedBy
-          
+          post.dislikedBy = action.post.dislikedBy
         }
         return post
       })
