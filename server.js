@@ -3,14 +3,26 @@ const express = require('express')
 const { join } = require('path')
 const syncDB = require('./db')
 
-const { ApolloServer } = require('apollo-server-express')
+const { ApolloServer, ApolloError } = require('apollo-server-express')
 const { typeDefs, resolvers } = require('./schemas')
+
+
+
 
 const app = express()
 
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
+	formatError: (err) => {
+		// Don't give the specific errors to the client.
+		if (err.message.startsWith('Database Error: ')) {
+			return new Error('Internal server error');
+		}
+		// Otherwise return the original error. The error can also
+		// be manipulated in other ways, as long as it's returned.
+		return err;
+	},
 	context: require('./utils/auth.js').authMiddleware
 })
 

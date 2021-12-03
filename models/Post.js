@@ -6,18 +6,8 @@ const Post = new Schema({
   body: String,
   image: String,
   posted: String,
-  likes: {
-    count: Number,
-    likedBy: [
-      { _id: Schema.Types.ObjectId }
-    ]
-  },
-  dislikes: {
-    count: Number,
-    dislikedBy: [
-      { _id: Schema.Types.ObjectId }
-    ]
-  },
+  likedBy: {type: [Schema.Types.ObjectId], default: []} ,
+  dislikedBy: { type: [Schema.Types.ObjectId], default: [] } ,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

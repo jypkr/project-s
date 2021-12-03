@@ -1,12 +1,19 @@
 import { useReducer } from 'react'
-import { GET_POSTS, ADD_POST, UPDATE_POST,UPDATE_BODY, UPDATE_TITLE, DELETE_POST, UPDATE_IMAGE } from './action.js'
+import { GET_POSTS, ADD_POST, UPDATE_POST,UPDATE_BODY, UPDATE_TITLE, DELETE_POST, UPDATE_IMAGE, GET_USER } from './action.js'
 export const reducer = (state, action) => {
-  console.log(action)
+  
   switch (action.type) {
     case GET_POSTS:
       return {
         ...state,
-        posts: action.posts
+        posts: action.posts,
+        user:action.user
+      }
+
+    case GET_USER:
+      return{
+        state,
+        user:action.user
       }
     case ADD_POST:
       console.log(action.post)
@@ -19,15 +26,18 @@ export const reducer = (state, action) => {
       }
     case UPDATE_POST:
       let posts = JSON.parse(JSON.stringify(state.posts))
+      console.log(action)
       posts = posts.map(post => {
-        if (post._id === action._id) {
-          post.title = action.title
-          post.body = action.body
-          post.image= action.image
+        if (post._id === action.post._id) {
+          post.title = action.post.title
+          post.body = action.post.body
+          post.image= action.post.image
+          post.likedBy = action.post.likedBy
           
         }
         return post
       })
+      console.log(posts)
       return {
         ...state,
         posts

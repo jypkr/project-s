@@ -8,7 +8,18 @@ export const QUERY_POSTS = gql`
       body
       image
       posted
+      likedBy
+      dislikedBy
        
+    }
+  }
+`
+export const QUERY_USER = gql`
+  query {
+    user {
+      _id
+      name
+      email      
     }
   }
 `
