@@ -35,9 +35,9 @@ const PostCard = ({ title, body, image, posted, _id, likedBy, dislikedBy, handle
         <CardActions>
           <Button size="small"
           onClick={()=>handleLike(_id)}
-          >Like count:{likedBy.length}</Button>
+          >Like count:{likedBy  ? likedBy.length : <>0</>}</Button>
           <Button size="small"
-            onClick={() => handleDislike(_id)}>Dislike count:{dislikedBy.length}</Button>
+            onClick={() => handleDislike(_id)}>Dislike count:{dislikedBy ? dislikedBy.length:<>0</>}</Button>
           <Button size="small"
             onClick={() => handleDeletePost(_id)}>Delete </Button>
          

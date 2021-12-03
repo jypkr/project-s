@@ -22,13 +22,17 @@ export const reducer = (state, action) => {
         posts: [...state.posts, action.post],
         title: '',
         body: '',
-        image: ''
+        image: '',
+        likedBy:[],
+        dislikedBy:[]
+        
       }
     case UPDATE_POST:
       let posts = JSON.parse(JSON.stringify(state.posts))
       console.log(action)
       posts = posts.map(post => {
         if (post._id === action.post._id) {
+          
           post.title = action.post.title
           post.body = action.post.body
           post.image= action.post.image

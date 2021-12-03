@@ -23,7 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const PostForm = () => {
   const [state, dispatch] = useStoreContext()
- 
+
   const { loading, data } = useQuery(QUERY_POSTS)
 
   const [addPost] = useMutation(ADD_POST)
@@ -37,8 +37,8 @@ const PostForm = () => {
         type: 'GET_POSTS',
         posts: data.posts
       })
-      
-      
+
+
     }
   }, [data])
 
@@ -66,13 +66,13 @@ const PostForm = () => {
         break
     }
   }
-  
 
 
-  const handleDeletePost = async ( id) =>{
-    
+
+  const handleDeletePost = async (id) => {
+
     const post = {
-      _id:id
+      _id: id
     }
 
     try {
@@ -83,15 +83,15 @@ const PostForm = () => {
         type: 'DELETE_POST',
         post
       })
-      
-      
-     
-      
-      
 
-     
 
-      
+
+
+
+
+
+
+
 
     } catch (err) {
       console.error(err)
@@ -103,28 +103,28 @@ const PostForm = () => {
     event.preventDefault()
     let posted = String(Date.now())
     console.log(state.image)
-    
+
     const post = {
-      _id:1,
+      _id: 1,
       title: state.title,
       body: state.body,
       image: state.image,
       posted: posted
-      
+
     }
 
     try {
       const { data } = await addPost({
         variables: post
       })
-      
+
       post._id = data.addPost._id
-      
+
       dispatch({
         type: 'ADD_POST',
         post
       })
-      
+
 
     } catch (err) {
       console.error(err)
@@ -135,26 +135,37 @@ const PostForm = () => {
   const handleLike = async (_id) => {
     //Need to get UserId
     let userID = localStorage.getItem('userId')
-    let post= {
-      _id:_id,
-      title:'title',
-      body:'body',
+    let post = {
+      _id: _id,
+      title: 'title',
+      body: 'body',
       image: 'image',
-      likedBy:[],
+      likedBy: [],
       dislikedBy: []
     }
-    state.posts.forEach(element=>{
-      if(element._id===post._id)
-      {
-        post.title=element.title
+    state.posts.forEach(element => {
+      if (element._id === post._id) {
+        post.title = element.title
         post.body = element.body
-        post.image = element.image 
-        post.likedBy= [...element.likedBy,userID]
-        post.dislikedBy = [...element.dislikedBy]
+        post.image = element.image
+        if (element.likedBy) {
+          post.likedBy = [...element.likedBy, userID]
+        } else {
+          post.likedBy = [userID]
+        }
+        let flag = post.dislikedBy.length
+        console.log(flag)
+        if (flag != 0) {
+          post.dislikedBy = element.disliked.filter(element => element !== userID)
+        }
+
+
+
+
       }
     })
 
-     try {
+    try {
       const { data } = await updatePost({
         variables: post
       })
@@ -162,16 +173,16 @@ const PostForm = () => {
         type: 'UPDATE_POST',
         post
       })
-      }
-      catch (err) {
+    }
+    catch (err) {
       console.error(err)
-      
+
     }
 
 
 
   }
-  const handleDislike =async (_id) => {
+  const handleDislike = async (_id) => {
     //Need to get UserId
     let userID = localStorage.getItem('userId')
     let post = {
@@ -180,15 +191,28 @@ const PostForm = () => {
       body: 'body',
       image: 'image',
       likedBy: [],
-      dislikedBy:[]
+      dislikedBy: []
     }
     state.posts.forEach(element => {
       if (element._id === post._id) {
         post.title = element.title
         post.body = element.body
         post.image = element.image
-        post.likedBy = [...element.likedBy]
-        post.dislikedBy= [...element.dislikedBy, userID]
+        //filter out userId from element.likedBy
+
+        let flag = post.likedBy.length
+        console.log(flag)
+        if (flag != 0) {
+          post.likedBy = element.likedBy.filter(element => element !== userID)
+        }
+        
+        if (element.dislikedBy) {
+
+          post.dislikedBy = [...element.dislikedBy, userID]
+        } else {
+          post.dislikedBy = [userID]
+        }
+
       }
     })
 
@@ -275,12 +299,12 @@ const PostForm = () => {
                         body={post.body}
                         image={post.image}
                         posted={post.posted}
-                        _id = {post._id}
+                        _id={post._id}
                         likedBy={post.likedBy}
-                        dislikedBy = {post.dislikedBy}
+                        dislikedBy={post.dislikedBy}
                         handleLike={handleLike}
                         handleDislike={handleDislike}
-                        handleDeletePost = {handleDeletePost}
+                        handleDeletePost={handleDeletePost}
                       >
 
                       </PostCard>
