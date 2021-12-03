@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { SettingsInputAntennaTwoTone } from '@mui/icons-material'
+import { ConstructionOutlined, SettingsInputAntennaTwoTone } from '@mui/icons-material'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -22,6 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const PostForm = () => {
   const [state, dispatch] = useStoreContext()
+ 
   const { loading, data } = useQuery(QUERY_POSTS)
 
   const [addPost] = useMutation(ADD_POST)
@@ -35,6 +36,8 @@ const PostForm = () => {
         type: 'GET_POSTS',
         posts: data.posts
       })
+      
+      
     }
   }, [data])
 
@@ -62,6 +65,7 @@ const PostForm = () => {
         break
     }
   }
+  
 
 
   const handleDeletePost = async ( id) =>{
@@ -78,7 +82,10 @@ const PostForm = () => {
         type: 'DELETE_POST',
         post
       })
-      console.log(data)
+      
+      
+     
+      
       
 
      
@@ -96,24 +103,30 @@ const PostForm = () => {
     let posted = String(Date.now())
     console.log(state.image)
     const post = {
+      _id:1,
       title: state.title,
       body: state.body,
       image: state.image,
       posted: posted
+      
     }
 
     try {
       const { data } = await addPost({
         variables: post
       })
+      
+      post._id = data.addPost._id
+      
       dispatch({
         type: 'ADD_POST',
         post
       })
+      
 
     } catch (err) {
       console.error(err)
-      console.log(post)
+      console.log(data)
     }
   }
 

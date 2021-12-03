@@ -7,14 +7,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 const PostCard = ({ title, body, image, posted, _id, handleDeletePost }) =>{
-console.log(_id)
+
   const handleLike=()=>{
   console.log('like button clicked')
-  console.log(title)
+  
 }
   const handleDislike = () => {
     console.log('dislike button clicked')
-    console.log(title)
+    
   }
 
   return (
@@ -33,7 +33,7 @@ console.log(_id)
           >
           <Typography  gutterBottom variant="h5" component="div">
             {title}
-            {_id}
+            
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {body}
