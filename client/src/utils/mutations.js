@@ -1,19 +1,21 @@
 import { gql } from '@apollo/client'
 
 export const ADD_POST = gql`
-  mutation addPost( $title: String!, $body: String!) {
-    addPost(title: $title, body: $body) {
+  mutation addPost( $title: String!, $body: String!, $image: String!, , $posted: String!) {
+    addPost(title: $title, body: $body, image: $image, posted: $posted) {
       _id
       title
       body
- 
+      image
+      posted
+      
     }
   }
 `
 
 export const UPDATE_POST = gql`
-  mutation updatePost($_id: ID!, $title: String!, $body: String!) {
-    updatePost(_id: $_id,  title: $title, body: $body) {
+  mutation updatePost($_id: ID!, $title: String!, $body: String!, $image: String!) {
+    updatePost(_id: $_id,  title: $title, body: $body, image: $image) {
       _id
     }
   }
@@ -37,8 +39,11 @@ export const LOGIN_USER = gql`
         email
         posts {
           _id
+          hide
           title
           body
+          image
+          posted
         }
       }
     }
@@ -52,6 +57,14 @@ export const REGISTER_USER = gql`
         _id
         name
         email
+        posts {
+          _id
+          hide
+          title
+          body
+          image
+          posted
+        }
       }
     }
   }

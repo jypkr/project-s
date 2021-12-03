@@ -5,7 +5,16 @@ const User = new Schema({
   name: String,
   email: String,
   password: String,
+  profile:{
+    bio: String,
+    profileImage: String,
+    background: String,
+  }, 
   posts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
+  favPosts:[{
     type: Schema.Types.ObjectId,
     ref: 'Post'
   }],
@@ -16,7 +25,7 @@ const User = new Schema({
   friendRequests: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }],
+  }]
 })
 
 User.pre('save', async function (next) {
