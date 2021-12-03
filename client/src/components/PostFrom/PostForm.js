@@ -133,6 +133,8 @@ const PostForm = () => {
   }
 
   const handleLike = async (_id) => {
+    //Need to get UserId
+    let userID = localStorage.getItem('userId')
     let post= {
       _id:_id,
       title:'title',
@@ -145,8 +147,8 @@ const PostForm = () => {
       {
         post.title=element.title
         post.body = element.body
-        post.image = element.image
-        post.likedBy= [_id]
+        post.image = element.image 
+        post.likedBy= [...element.likedBy, userID]
       }
     })
 
@@ -240,6 +242,7 @@ const PostForm = () => {
                         image={post.image}
                         posted={post.posted}
                         _id = {post._id}
+                        likedBy={post.likedBy}
                         handleLike={handleLike}
                         handleDislike={handleDislike}
                         handleDeletePost = {handleDeletePost}

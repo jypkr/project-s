@@ -32,7 +32,7 @@ export const reducer = (state, action) => {
           post.title = action.post.title
           post.body = action.post.body
           post.image= action.post.image
-          // post.likedBy = action.post.likedBy
+          post.likedBy = action.post.likedBy
           
         }
         return post

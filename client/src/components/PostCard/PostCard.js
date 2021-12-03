@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const PostCard = ({ title, body, image, posted, _id, handleDeletePost, handleLike, handleDislike }) =>{
+const PostCard = ({ title, body, image, posted, _id, likedBy, handleDeletePost, handleLike, handleDislike }) =>{
 
   
 
@@ -35,7 +35,7 @@ const PostCard = ({ title, body, image, posted, _id, handleDeletePost, handleLik
         <CardActions>
           <Button size="small"
           onClick={()=>handleLike(_id)}
-          >Like</Button>
+          >Like count:{likedBy.length}</Button>
           <Button size="small"
             onClick={() => handleDislike(_id)}>Dislike</Button>
           <Button size="small"
