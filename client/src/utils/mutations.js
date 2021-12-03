@@ -8,6 +8,7 @@ export const ADD_POST = gql`
       body
       image
       posted
+      likedBy
       
     }
   }
@@ -17,6 +18,7 @@ export const UPDATE_POST = gql`
   mutation updatePost($_id: ID!, $title: String!, $body: String!, $image: String!) {
     updatePost(_id: $_id,  title: $title, body: $body, image: $image) {
       _id
+      
     }
   }
 `

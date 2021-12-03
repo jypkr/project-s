@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { ConstructionOutlined, SettingsInputAntennaTwoTone } from '@mui/icons-material'
+import { UserInputError } from 'apollo-server-errors'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -102,6 +103,7 @@ const PostForm = () => {
     event.preventDefault()
     let posted = String(Date.now())
     console.log(state.image)
+    
     const post = {
       _id:1,
       title: state.title,
@@ -128,6 +130,46 @@ const PostForm = () => {
       console.error(err)
       console.log(data)
     }
+  }
+
+  const handleLike = async (_id) => {
+    let post= {
+      _id:_id,
+      title:'title',
+      body:'body',
+      image: 'image',
+      likedBy:[]
+    }
+    state.posts.forEach(element=>{
+      if(element._id===post._id)
+      {
+        post.title=element.title
+        post.body = element.body
+        post.image = element.image
+        post.likedBy= [_id]
+      }
+    })
+
+     try {
+      const { data } = await updatePost({
+        variables: post
+      })
+      dispatch({
+        type: 'UPDATE_POST',
+        post
+      })
+      }
+      catch (err) {
+      console.error(err)
+      
+    }
+
+
+
+  }
+  const handleDislike = (_id) => {
+    console.log('dislike button clicked')
+
   }
 
   return (
@@ -198,6 +240,8 @@ const PostForm = () => {
                         image={post.image}
                         posted={post.posted}
                         _id = {post._id}
+                        handleLike={handleLike}
+                        handleDislike={handleDislike}
                         handleDeletePost = {handleDeletePost}
                       >
 

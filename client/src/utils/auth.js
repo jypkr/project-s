@@ -22,7 +22,7 @@ const AuthService = {
     localStorage.setItem('name', user.name)
     localStorage.setItem('email', user.email)
     localStorage.setItem('profile', user.profile)
-
+    localStorage.setItem('userId', user._id)
     window.location = "/home"
   },
   logout() {

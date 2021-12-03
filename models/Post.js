@@ -6,8 +6,8 @@ const Post = new Schema({
   body: String,
   image: String,
   posted: String,
-  likedBy: Schema.Types.ObjectId ,
-  dislikedBy: Schema.Types.ObjectId ,
+  likedBy: {type: [Schema.Types.ObjectId], default: []} ,
+  dislikedBy: { type: [Schema.Types.ObjectId], default: [] } ,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
