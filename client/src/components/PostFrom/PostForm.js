@@ -21,11 +21,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
 const PostForm = () => {
   const [state, dispatch] = useStoreContext()
-
+  
   const { loading, data } = useQuery(QUERY_POSTS)
-
+  
   const [addPost] = useMutation(ADD_POST)
   const [updatePost] = useMutation(UPDATE_POST)
   const [deletePost] = useMutation(DELETE_POST)
@@ -148,8 +149,24 @@ const PostForm = () => {
         post.title = element.title
         post.body = element.body
         post.image = element.image
-        if (element.likedBy) {
-          post.likedBy = [...element.likedBy, userID]
+        if (element.likedBy &&element.likedBy.length>0) {
+          console.log('length >0')
+          let duplicate = element.likedBy.filter(temp=> temp===userID)
+          console.log(duplicate)
+          if(duplicate){
+            console.log('already in')
+            let array =[]
+            element.likedBy.forEach(temp => {
+              if(temp!==userID){
+                array.push(temp)
+              }
+            });
+
+            post.likedBy= array
+          }else{
+            post.likedBy = [...element.likedBy, userID]
+          }
+          
         } else {
           post.likedBy = [userID]
         }
@@ -158,9 +175,6 @@ const PostForm = () => {
         if (flag != 0) {
           post.dislikedBy = element.disliked.filter(element => element !== userID)
         }
-
-
-
 
       }
     })
@@ -206,9 +220,21 @@ const PostForm = () => {
           post.likedBy = element.likedBy.filter(element => element !== userID)
         }
         
-        if (element.dislikedBy) {
+        if (element.dislikedBy &&element.dislikedBy.length > 0) {
+          let duplicate = element.dislikedBy.filter(temp => temp === userID)
+          console.log(duplicate)
+          if(duplicate){
+            console.log('already in')
+            let array = []
+            element.dislikedBy.forEach(temp => {
+              if (temp !== userID) {
+                array.push(temp)
+              }
+            });
 
-          post.dislikedBy = [...element.dislikedBy, userID]
+            post.dislikedBy = array
+          }
+          
         } else {
           post.dislikedBy = [userID]
         }
