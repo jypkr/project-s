@@ -17,13 +17,20 @@ const AuthService = {
       return false
     }
   },
-  login(token) {
+  login(token, user) {
     localStorage.setItem('token', token)
-    
+    localStorage.setItem('name', user.name)
+    localStorage.setItem('email', user.email)
+    localStorage.setItem('profile', user.profile)
+    localStorage.setItem('userId', user._id)
+    window.location = "/home"
   },
   logout() {
+    console.log("logout")
     localStorage.removeItem('token')
+    window.location = "/auth"
   }
+
 }
 
 export default AuthService

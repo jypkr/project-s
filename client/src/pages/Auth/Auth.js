@@ -19,27 +19,35 @@ const Auth = () => {
 
   const handleRegisterUser = async event => {
     event.preventDefault()
-    const { data: { register: { token } } } = await register({
+    const { data: { register: { token,user } } } = await register({
       variables: {
         name: authState.name,
         email: authState.email,
         password: authState.password
       }
     })
-    AuthService.login(token)
+    AuthService.login(token,user)
   }
 
   const handleLoginUser = async event => {
-    event.preventDefault()
-    const { data: { login: { token } } } = await login({
-      variables: {
-        email: authState.lEmail,
-        password: authState.lPassword
-      }
-    })
-    
-    
-    AuthService.login(token)
+    // Need more function for validation
+    if (authState.lEmail === "" || authState.lPassword === "") 
+    {
+      event.preventDefault()
+      alert("enter email or pwd")
+    }
+    else 
+    {
+      event.preventDefault()
+      const { data: { login: { token, user } } } = await login({
+        variables: {
+          email: authState.lEmail,
+          password: authState.lPassword
+        }
+      })
+
+      AuthService.login(token, user)
+    }
   }
 
   return (

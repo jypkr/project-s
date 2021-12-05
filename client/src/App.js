@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { StoreProvider } from './utils/GlobalState.js'
 import Home from './pages/Home'
 import Auth from './pages/Auth'
+import Profile from './pages/Profile'
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -22,6 +23,9 @@ const App = () => {
             <Switch>
               <Route exact path='/home'>
                 <Home />
+              </Route>
+              <Route exact path='/profile'>
+                <Profile />
               </Route>
               <Route path='/'>
                 <Auth />
