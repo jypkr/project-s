@@ -12,11 +12,10 @@ const StoreProvider = ({ value = [], ...props }) => {
     title: '',
     body: '',
     image: '',
-    profile: {
-      bio: '',
-      profileImage: '',
-      background: ''
-    }
+    bio: '',
+    profileImage: '',
+    background: ''
+
   })
   return <Provider value={[state, dispatch]} {...props} />
 }

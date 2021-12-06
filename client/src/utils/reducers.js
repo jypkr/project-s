@@ -107,7 +107,7 @@ export const reducer = (state, action) => {
     case UPDATE_BIO:
       return {
         ...state,
-        bio: action.profile.bio
+        bio: action.bio
       }
 
     case UPDATE_PROFILEIMAGE:

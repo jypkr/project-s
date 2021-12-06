@@ -60,11 +60,10 @@ const ProfileSettingForm = () => {
     const user = {
       name: state.name,
       email: state.email,
-      profile: {
-        bio: state.bio,
-        profileImage: state.profileImage,
-        background: state.background
-      }
+      bio: state.bio,
+      profileImage: state.profileImage,
+      background: state.background
+
     }
 
     try {
