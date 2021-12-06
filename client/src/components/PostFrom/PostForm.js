@@ -38,8 +38,6 @@ const PostForm = () => {
         type: 'GET_POSTS',
         posts: data.posts
       })
-
-
     }
   }, [data])
 
@@ -84,15 +82,6 @@ const PostForm = () => {
         type: 'DELETE_POST',
         post
       })
-
-
-
-
-
-
-
-
-
 
     } catch (err) {
       console.error(err)
@@ -253,9 +242,7 @@ const PostForm = () => {
     }
     catch (err) {
       console.error(err)
-
     }
-
   }
 
   return (

@@ -72,3 +72,11 @@ export const REGISTER_USER = gql`
     }
   }
 `
+
+export const UPDATE_PROFILE = gql`
+  mutation updateProfile($name: String!, $email: String!, $bio: String!, $profileImage: String!, $background: String!) {
+    updateProfile(name: $name, email: $email, bio: $bio, profileImage: $profileImage, background: $background) {
+      user
+    }
+  }
+`
