@@ -24,9 +24,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const PostForm = () => {
   const [state, dispatch] = useStoreContext()
-  
+
   const { loading, data } = useQuery(QUERY_POSTS)
-  
+
   const [addPost] = useMutation(ADD_POST)
   const [updatePost] = useMutation(UPDATE_POST)
   const [deletePost] = useMutation(DELETE_POST)
@@ -38,8 +38,6 @@ const PostForm = () => {
         type: 'GET_POSTS',
         posts: data.posts
       })
-
-
     }
   }, [data])
 
@@ -84,15 +82,6 @@ const PostForm = () => {
         type: 'DELETE_POST',
         post
       })
-
-
-
-
-
-
-
-
-
 
     } catch (err) {
       console.error(err)
@@ -149,24 +138,24 @@ const PostForm = () => {
         post.title = element.title
         post.body = element.body
         post.image = element.image
-        if (element.likedBy &&element.likedBy.length>0) {
+        if (element.likedBy && element.likedBy.length > 0) {
           console.log('length >0')
-          let duplicate = element.likedBy.filter(temp=> temp===userID)
+          let duplicate = element.likedBy.filter(temp => temp === userID)
           console.log(duplicate)
-          if(duplicate){
+          if (duplicate) {
             console.log('already in')
-            let array =[]
+            let array = []
             element.likedBy.forEach(temp => {
-              if(temp!==userID){
+              if (temp !== userID) {
                 array.push(temp)
               }
             });
 
-            post.likedBy= array
-          }else{
+            post.likedBy = array
+          } else {
             post.likedBy = [...element.likedBy, userID]
           }
-          
+
         } else {
           post.likedBy = [userID]
         }
@@ -219,11 +208,11 @@ const PostForm = () => {
         if (flag != 0) {
           post.likedBy = element.likedBy.filter(element => element !== userID)
         }
-        
-        if (element.dislikedBy &&element.dislikedBy.length > 0) {
+
+        if (element.dislikedBy && element.dislikedBy.length > 0) {
           let duplicate = element.dislikedBy.filter(temp => temp === userID)
           console.log(duplicate)
-          if(duplicate){
+          if (duplicate) {
             console.log('already in')
             let array = []
             element.dislikedBy.forEach(temp => {
@@ -234,7 +223,7 @@ const PostForm = () => {
 
             post.dislikedBy = array
           }
-          
+
         } else {
           post.dislikedBy = [userID]
         }
@@ -253,9 +242,7 @@ const PostForm = () => {
     }
     catch (err) {
       console.error(err)
-
     }
-
   }
 
   return (

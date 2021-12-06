@@ -36,13 +36,23 @@ const typeDefs = gql`
   }
   type Mutation {
     addPost(title: String!, body: String!, image: String!, posted: String!, likedBy:[ID]): Post!
+
     updatePost(_id:ID, title: String!, body: String!, image: String!, likedBy:[ID], dislikedBy: [ID]): Post!
+
     deletePost(_id: ID!): Post
+
     register(name: String!, email: String!, password: String!): Auth
+
     login(email: String!, password: String!): Auth
+
+    updateProfile(bio: String!, profileImage: String!, background: String!): User
+
     sendFriendRequest(sentTo_id: ID!, sentBy_id: ID!): User
+
     acceptFriendRequest(sentBy_id: ID!, sentTo_id: ID!): User
+
     denyFriendRequest(sentBy_id: ID!, sentTo_id: ID!): User
+
     deleteFriend(user1_id: ID!, user2_id: ID!): User
   }
 `

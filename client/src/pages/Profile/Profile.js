@@ -15,8 +15,11 @@ const Profile = () => {
       <h2>Name: {name}</h2>
       <h2>email: {email}</h2>
       <h2>profile: {profile}</h2>
-      <PostForm></PostForm>
       
+      <ProfileSettingForm></ProfileSettingForm>
+
+      <PostForm></PostForm>
+
       <Navbar></Navbar>
     </>
 
