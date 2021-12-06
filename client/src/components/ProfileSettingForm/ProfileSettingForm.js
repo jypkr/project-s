@@ -2,38 +2,48 @@ import './ProfileSettingForm.css'
 import { useQuery, useMutation } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import { useStoreContext } from '../../utils/GlobalState.js'
-import { QUERY_POSTS } from '../../utils/queries.js'
-import { ADD_POST, UPDATE_POST, DELETE_POST } from '../../utils/mutations'
+import { QUERY_USER } from '../../utils/queries.js'
+import { UPDATE_PROFILE } from '../../utils/mutations'
+import TextField from '@mui/material/TextField'
 
 
 
-const ProfileSettingForm = () =>{
+const ProfileSettingForm = () => {
   const [state, dispatch] = useStoreContext()
-  const { loading, data } = useQuery(QUERY_POSTS)
+  const { loading, data } = useQuery(QUERY_USER)
 
-  const [addPost] = useMutation(ADD_POST)
-  const [updatePost] = useMutation(UPDATE_POST)
-  const [deletePost] = useMutation(DELETE_POST)
-
+  const [updateProfile] = useMutation(UPDATE_PROFILE)
 
   const handleInputChange = ({ target }) => {
     switch (target.name) {
-      case 'title':
+      case 'name':
         dispatch({
-          type: 'UPDATE_TITLE',
-          title: target.value
+          type: 'UPDATE_NAME',
+          name: target.value
         })
         break
-      case 'body':
+      case 'email':
         dispatch({
-          type: 'UPDATE_BODY',
-          body: target.value
+          type: 'UPDATE_EMAIL',
+          email: target.value
         })
         break
-      case 'image':
+      case 'bio':
         dispatch({
-          type: 'UPDATE_IMAGE',
-          image: target.value
+          type: 'UPDATE_BIO',
+          bio: target.value
+        })
+        break
+      case 'profileImage':
+        dispatch({
+          type: 'UPDATE_PROFILEIMAGE',
+          profileImage: target.value
+        })
+        break
+      case 'background':
+        dispatch({
+          type: 'UPDATE_BACKGROUND',
+          background: target.value
         })
         break
       default:
@@ -46,62 +56,87 @@ const ProfileSettingForm = () =>{
 
   const handleChangeProfile = async event => {
     event.preventDefault()
-    let posted = String(Date.now())
-    console.log(state.image)
-    const post = {
-      title: state.title,
-      body: state.body,
-      image: state.image,
-      posted: posted
+    console.log(state)
+    const user = {
+      name: state.name,
+      email: state.email,
+      profile: {
+        bio: state.bio,
+        profileImage: state.profileImage,
+        background: state.background
+      }
     }
 
     try {
-      const { data } = await addPost({
-        variables: post
+      const { data } = await updateProfile({
+        variables: user
       })
       dispatch({
-        type: 'ADD_POST',
-        post
+        type: 'UPDATE_PROFILE',
+        user
       })
-      
+
+      console.log(data)
+
     } catch (err) {
       console.error(err)
-      console.log(post)
+      console.log(user)
     }
   }
 
   return (
     <>
-      <form id="changeprofile">
-        <p>
-          <label htmlFor='name'>name</label>
-          <input
-            type='text'
-            name='name'
-            value={state.name}
-            onChange={handleInputChange}
-          />
-        </p>
-        <p>
-          <label htmlFor='body'>email</label>
-          <input
-            type='text'
-            name='body'
-            value={state.body}
-            onChange={handleInputChange}
-          />
-        </p>
-        <p>
-          <label htmlFor='image'>bio</label>
-          <input
-            type='text'
-            name='image'
-            value={state.image}
-            onChange={handleInputChange}
-          />
-        </p>
-        <button onClick={handleChangeProfile}>Change Profile</button>
-      </form>
+      <TextField
+        id="outlined-textarea"
+        label="name"
+        placeholder="name"
+        value={state.name}
+        name='name'
+        onChange={handleInputChange}
+
+        multiline
+      />
+      <TextField
+        id="outlined-textarea"
+        label="email"
+        placeholder="email"
+        value={state.email}
+        name='email'
+        onChange={handleInputChange}
+
+        multiline
+      />
+      <TextField
+        id="outlined-textarea"
+        label="bio"
+        placeholder="bio"
+        value={state.bio}
+        name='bio'
+        onChange={handleInputChange}
+
+        multiline
+      />
+      <TextField
+        id="outlined-textarea"
+        label="profileImage"
+        placeholder="profileImage"
+        value={state.profileImage}
+        name='profileImage'
+        onChange={handleInputChange}
+        multiline
+      />
+      <TextField
+        id="outlined-textarea"
+        label="background"
+        placeholder="background"
+        value={state.background}
+        name='background'
+        onChange={handleInputChange}
+
+        multiline
+      />
+
+      <button onClick={handleChangeProfile}>Edit Profile</button>
     </>
   )
 }
