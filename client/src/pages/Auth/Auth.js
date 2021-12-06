@@ -1,120 +1,17 @@
 import { useState } from 'react'
-import { useMutation } from '@apollo/client'
-import { REGISTER_USER, LOGIN_USER } from '../../utils/mutations.js'
-import AuthService from '../../utils/auth.js'
+import Login from '../../components/Login'
+import Register from '../../components/Register'
 
 const Auth = () => {
-  const [authState, setAuthState] = useState({
-    name: '',
-    email: '',
-    password: '',
-    lEmail: '',
-    lPassword: ''
-  })
+  const [register, setRegister]= useState(false)
 
-  const [register] = useMutation(REGISTER_USER)
-  const [login] = useMutation(LOGIN_USER)
-
-  const handleInputChange = ({ target: { name, value } }) => setAuthState({ ...authState, [name]: value })
-
-  const handleRegisterUser = async event => {
-    event.preventDefault()
-    const { data: { register: { token,user } } } = await register({
-      variables: {
-        name: authState.name,
-        email: authState.email,
-        password: authState.password
-      }
-    })
-    AuthService.login(token,user)
+  const setParentState= ()=>{
+    setRegister(!register)
   }
-
-  const handleLoginUser = async event => {
-    // Need more function for validation
-    if (authState.lEmail === "" || authState.lPassword === "") 
-    {
-      event.preventDefault()
-      alert("enter email or pwd")
-    }
-    else 
-    {
-      event.preventDefault()
-      const { data: { login: { token, user } } } = await login({
-        variables: {
-          email: authState.lEmail,
-          password: authState.lPassword
-        }
-      })
-
-      AuthService.login(token, user)
-    }
-  }
-
   return (
     <>
-      <h1>Register</h1>
-      <form onSubmit={handleRegisterUser}>
-        <div className='flex-row space-between my-2'>
-          <label htmlFor='name'>Name:</label>
-          <input
-            placeholder='name'
-            name='name'
-            type='name'
-            id='name'
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='flex-row space-between my-2'>
-          <label htmlFor='email'>Email:</label>
-          <input
-            placeholder='youremail@test.com'
-            name='email'
-            type='email'
-            id='email'
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='flex-row space-between my-2'>
-          <label htmlFor='pwd'>Password:</label>
-          <input
-            placeholder='******'
-            name='password'
-            type='password'
-            id='pwd'
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='flex-row flex-end'>
-          <button type='submit'>Register</button>
-        </div>
-      </form>
-      <hr />
-      <h1>Login</h1>
-      <form onSubmit={handleLoginUser}>
-        <div className='flex-row space-between my-2'>
-          <label htmlFor='lEmail'>Email:</label>
-          <input
-            placeholder='youremail@test.com'
-            name='lEmail'
-            type='lEmail'
-            id='lEmail'
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='flex-row space-between my-2'>
-          <label htmlFor='lPassword'>Password:</label>
-          <input
-            placeholder='******'
-            name='lPassword'
-            type='lPassword'
-            id='lPassword'
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='flex-row flex-end'>
-          <button type='submit'>Login</button>
-        </div>
-      </form>
+      {!register ? <Login setParentState={setParentState}></Login> : <Register setParentState={setParentState}></Register>}
+     
     </>
   )
 }
