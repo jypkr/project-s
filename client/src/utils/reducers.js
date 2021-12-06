@@ -105,10 +105,10 @@ export const reducer = (state, action) => {
       }
 
     case UPDATE_BIO:
-      let tempProfile
+      
       return {
         ...state,
-        profile.bio: action.profile.bio
+        bio: action.bio
       }
 
     case UPDATE_PROFILEIMAGE:
