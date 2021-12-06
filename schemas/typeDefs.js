@@ -7,6 +7,7 @@ const typeDefs = gql`
     profileImage: String!
     background: String!
   }
+  
   type Post {
     _id: ID!
     hide: Boolean
@@ -16,8 +17,8 @@ const typeDefs = gql`
     posted: String!
     likedBy: [ID]
     dislikedBy: [ID]
-    
   }
+
   type User {
     _id: ID!
     name: String!
@@ -25,15 +26,18 @@ const typeDefs = gql`
     profile : Profile!
     posts: [Post!]
   }
+
   type Auth {
     token: ID!
     user: User!
   }
+
   type Query {
     posts: [Post!]
     post(_id: ID!): Post!
     user: User!
   }
+  
   type Mutation {
     addPost(title: String!, body: String!, image: String!, posted: String!, likedBy:[ID]): Post!
     updatePost(_id:ID, title: String!, body: String!, image: String!, likedBy:[ID], dislikedBy: [ID]): Post!

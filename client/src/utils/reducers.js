@@ -46,6 +46,7 @@ export const reducer = (state, action) => {
         ...state,
         posts
       }
+      
     case DELETE_POST:
       let array=[]
       state.posts.forEach(post => {
