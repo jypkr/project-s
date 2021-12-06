@@ -47,7 +47,7 @@ export const reducer = (state, action) => {
         ...state,
         posts
       }
-      
+
     case UPDATE_PROFILE:
       let user = JSON.parse(JSON.stringify(state.user))
       console.log(action)
@@ -59,7 +59,7 @@ export const reducer = (state, action) => {
         ...state,
         user
       }
-      
+
     case DELETE_POST:
       let array = []
       state.posts.forEach(post => {
@@ -105,6 +105,7 @@ export const reducer = (state, action) => {
       }
 
     case UPDATE_BIO:
+      
       return {
         ...state,
         bio: action.bio
