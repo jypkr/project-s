@@ -2,17 +2,19 @@ import './ProfileSettingForm.css'
 import { useQuery, useMutation } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import { useStoreContext } from '../../utils/GlobalState.js'
-import { QUERY_USER } from '../../utils/queries.js'
+import { QUERY_USERS } from '../../utils/queries.js'
 import { UPDATE_PROFILE } from '../../utils/mutations'
 import TextField from '@mui/material/TextField'
+import { TramOutlined } from '@mui/icons-material'
 
 
 
-const ProfileSettingForm = () => {
-  const [state, dispatch] = useStoreContext()
-  const { loading, data } = useQuery(QUERY_USER)
-
+const ProfileSettingForm = ({state,dispatch}) => {
+  
   const [updateProfile] = useMutation(UPDATE_PROFILE)
+  
+  
+
 
   const handleInputChange = ({ target }) => {
     switch (target.name) {
@@ -56,7 +58,7 @@ const ProfileSettingForm = () => {
 
   const handleChangeProfile = async event => {
     event.preventDefault()
-    console.log(state)
+    
     const user = {
       name: state.name,
       email: state.email,
@@ -75,17 +77,17 @@ const ProfileSettingForm = () => {
         user
       })
 
-      console.log(data)
+      
 
     } catch (err) {
       console.error(err)
-      console.log(user)
+      
     }
   }
 
   return (
     <>
-      <TextField
+      {/* <TextField
         id="outlined-textarea"
         label="name"
         placeholder="name"
@@ -104,7 +106,7 @@ const ProfileSettingForm = () => {
         onChange={handleInputChange}
 
         multiline
-      />
+      /> */}
       <TextField
         id="outlined-textarea"
         label="bio"
@@ -115,7 +117,7 @@ const ProfileSettingForm = () => {
 
         multiline
       />
-      <TextField
+      {/* <TextField
         id="outlined-textarea"
         label="profileImage"
         placeholder="profileImage"
@@ -133,8 +135,8 @@ const ProfileSettingForm = () => {
         onChange={handleInputChange}
 
         multiline
-      />
-
+      /> */}
+      
       <button onClick={handleChangeProfile}>Edit Profile</button>
     </>
   )

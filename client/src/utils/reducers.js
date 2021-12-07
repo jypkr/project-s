@@ -1,5 +1,6 @@
+import { ContentCutOutlined } from '@mui/icons-material'
 import { useReducer } from 'react'
-import { GET_POSTS, ADD_POST, UPDATE_POST, UPDATE_BODY, UPDATE_TITLE, DELETE_POST, UPDATE_IMAGE, GET_USER, UPDATE_PROFILE, UPDATE_NAME, UPDATE_EMAIL, UPDATE_BIO, UPDATE_PROFILEIMAGE, UPDATE_BACKGROUND } from './action.js'
+import { GET_POSTS,GET_USER, ADD_POST, UPDATE_POST, UPDATE_BODY, UPDATE_TITLE, DELETE_POST, UPDATE_IMAGE, GET_USERS, UPDATE_PROFILE, UPDATE_NAME, UPDATE_EMAIL, UPDATE_BIO, UPDATE_PROFILEIMAGE, UPDATE_BACKGROUND } from './action.js'
 export const reducer = (state, action) => {
 
   switch (action.type) {
@@ -7,12 +8,22 @@ export const reducer = (state, action) => {
       return {
         ...state,
         posts: action.posts,
-        user: action.user
+        
+      }
+
+    case GET_USERS:
+      let users = []
+      users= [...action.users]
+     
+      return {
+        ...state,
+        users: users
       }
 
     case GET_USER:
+     console.log(action)
       return {
-        state,
+        ...state,
         user: action.user
       }
 

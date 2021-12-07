@@ -5,7 +5,9 @@ const { signToken } = require('../utils/auth.js')
 const resolvers = {
   Query: {
     posts: async () => await Post.find({}),
-    post: async (parent, { _id }) => await Post.findById(_id)
+    post: async (parent,  {_id} ) => await Post.findById(_id),
+    users: async () => await User.find({}),
+    user: async (parent, {_id}) =>await User.findById(_id)
   },
   Mutation: {
     addPost: async (parent, post) => await Post.create(post),

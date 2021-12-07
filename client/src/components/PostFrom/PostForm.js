@@ -38,6 +38,7 @@ const PostForm = () => {
         type: 'GET_POSTS',
         posts: data.posts
       })
+      console.log(data)
     }
   }, [data])
 
