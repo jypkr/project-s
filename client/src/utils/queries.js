@@ -25,11 +25,13 @@ export const QUERY_USERS = gql`
 `
 
 export const QUERY_USER = gql`
-  query GetUser($_id:ID!) {
+  query User($_id:ID!) {
     user(_id:$_id) {
       _id
       name
-      email      
+      email
+      
+         
     }
   }
 `
