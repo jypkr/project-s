@@ -6,7 +6,7 @@ const AuthService = {
     try {
       let token = localStorage.getItem('token')
       const decoded = decode(token)
-      console.log(decoded)
+      
       return decoded
     } catch (error) {
       

@@ -4,8 +4,9 @@ const typeDefs = gql`
 
   
   type Profile {
-    profileImage: String!
-    background: String!
+    bio: String
+    profileImage: String
+    background: String
   }
   
   type Post {
@@ -23,8 +24,12 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     email: String!
-    profile : Profile!
+    profile : Profile
     posts: [Post!]
+    friends: [ID]
+    friendRequests: [ID]
+    favPosts:[ID]
+
   }
 
   type Auth {
@@ -52,8 +57,7 @@ const typeDefs = gql`
 
     login(email: String!, password: String!): Auth
 
-    updateProfile(bio: String!, profileImage: String!, background: String!): User
-
+     updateProfile(bio: String!, profileImage: String!, background: String!): User
     sendFriendRequest(sentTo_id: ID!, sentBy_id: ID!): User
 
     acceptFriendRequest(sentBy_id: ID!, sentTo_id: ID!): User

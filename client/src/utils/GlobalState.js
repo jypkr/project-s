@@ -18,11 +18,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     name:'',
     email:'',
     _id:'',
-    user:{
-      _id:'',
-      name:'',
-      email:''
-    }
+    user:{}
 
 
   })
@@ -32,3 +28,4 @@ const StoreProvider = ({ value = [], ...props }) => {
 const useStoreContext = () => useContext(StoreContext)
 
 export { StoreProvider, useStoreContext }
+

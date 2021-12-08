@@ -30,6 +30,20 @@ export const QUERY_USER = gql`
       _id
       name
       email
+      profile{
+        bio
+        profileImage
+        background
+      }
+      posts{
+        _id
+      }
+      friends
+      friendRequests
+      favPosts
+      
+      
+
       
          
     }

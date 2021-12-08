@@ -1,19 +1,19 @@
 import './ProfileSettingForm.css'
 import { useQuery, useMutation } from '@apollo/client'
-import { useState, useEffect } from 'react'
-import { useStoreContext } from '../../utils/GlobalState.js'
-import { QUERY_USERS } from '../../utils/queries.js'
+
 import { UPDATE_PROFILE } from '../../utils/mutations'
 import TextField from '@mui/material/TextField'
-import { TramOutlined } from '@mui/icons-material'
+
 
 
 
 const ProfileSettingForm = ({state,dispatch}) => {
   
-  const [updateProfile] = useMutation(UPDATE_PROFILE)
+  const [updateProfile,{error}] = useMutation(UPDATE_PROFILE)
   
-  
+  if(error){
+    console.log(error)
+  }
 
 
   const handleInputChange = ({ target }) => {
@@ -59,30 +59,26 @@ const ProfileSettingForm = ({state,dispatch}) => {
   const handleChangeProfile = async event => {
     event.preventDefault()
     
-    const user = {
-      name: state.name,
-      email: state.email,
-      bio: state.bio,
-      profileImage: state.profileImage,
-      background: state.background
+    let user = JSON.parse(JSON.stringify(state.user))
+    user.profile.bio = state.bio
 
-    }
-
+   
     try {
       const { data } = await updateProfile({
         variables: user
       })
-      dispatch({
-        type: 'UPDATE_PROFILE',
-        user
-      })
-
       
-
-    } catch (err) {
-      console.error(err)
-      
+      // dispatch({
+      //   type: 'UPDATE_POST',
+      //   user
+      // })
     }
+    catch (err) {
+      console.error(err)
+
+    }
+
+    
   }
 
   return (
