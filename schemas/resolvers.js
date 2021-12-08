@@ -34,7 +34,17 @@ const resolvers = {
       }
     },
 
-    updateProfile: async (parent, user) => await User.findByIdAndUpdate(user._id, { $set: { profile: user.profile } }),
+    updateProfile: async (_, {_id, bio, profileImage, background}) => {
+      console.log(_id)
+      let user = await User.findById(_id)
+      user.profile.bio=bio
+      user.profile.profileImage = profileImage
+      user.profile.background = background
+      User.findByIdAndUpdate(_id, { $set: {user } })
+      return user
+      
+      // return user
+    },
 
     sendFriendRequest: async (parent, { sentTo_id, sentBy_id }) => await User.findByIdAndUpdate(sentTo_id, { $push: { friendRequests: user_id, sentBy_id } }),
 

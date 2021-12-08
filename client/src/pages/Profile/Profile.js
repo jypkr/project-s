@@ -14,7 +14,6 @@ const Profile = () => {
 
 
   let { _id } = AuthService.getUser()
-  console.log(_id)
   const [state, dispatch] = useStoreContext()
   const { loading, data, error } = useQuery(QUERY_USER, {
     variables: {

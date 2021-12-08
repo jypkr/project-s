@@ -60,13 +60,17 @@ const ProfileSettingForm = ({state,dispatch}) => {
     event.preventDefault()
     
     let user = JSON.parse(JSON.stringify(state.user))
+    console.log(user)
     user.profile.bio = state.bio
-
+    user.profile.profileImage= state.profileImage
+    user.profile.background = state.background
+    console.log({...user.profile})
    
     try {
       const { data } = await updateProfile({
-        variables: user
+        variables: {_id:user._id, bio: user.profile.bio, profileImage: user.profile.profileImage, background: user.profile.background}
       })
+      console.log(data)
       
       // dispatch({
       //   type: 'UPDATE_POST',
@@ -113,7 +117,7 @@ const ProfileSettingForm = ({state,dispatch}) => {
 
         multiline
       />
-      {/* <TextField
+      <TextField
         id="outlined-textarea"
         label="profileImage"
         placeholder="profileImage"
@@ -131,7 +135,7 @@ const ProfileSettingForm = ({state,dispatch}) => {
         onChange={handleInputChange}
 
         multiline
-      /> */}
+      />
       
       <button onClick={handleChangeProfile}>Edit Profile</button>
     </>

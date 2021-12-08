@@ -20,14 +20,14 @@ export const reducer = (state, action) => {
       }
 
     case GET_USER:
-     console.log(action)
+     
       return {
         ...state,
         user: action.user
       }
 
     case ADD_POST:
-      console.log(action.post)
+      
       return {
         ...state,
         posts: [...state.posts, action.post],

@@ -76,9 +76,14 @@ export const REGISTER_USER = gql`
 `
 
 export const UPDATE_PROFILE = gql`
-  mutation updateProfile($name: String!, $email: String!, $bio: String!, $profileImage: String!, $background: String!) {
-    updateProfile(name: $name, email: $email, bio: $bio, profileImage: $profileImage, background: $background) {
-      user
+  mutation updateProfile($_id: ID!, $bio: String!, $profileImage: String!, $background: String!) {
+    updateProfile(_id: $_id, bio: $bio, profileImage: $profileImage, background: $background) {
+      _id
+      profile{
+        bio
+        profileImage
+        background
+      }
     }
   }
 `
