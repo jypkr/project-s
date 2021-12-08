@@ -12,8 +12,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { ConstructionOutlined, SettingsInputAntennaTwoTone } from '@mui/icons-material'
-import { UserInputError } from 'apollo-server-errors'
-
+import AuthService from '../../utils/auth.js'
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -67,6 +66,10 @@ const PostForm = () => {
     }
   }
 
+  const getUser=()=>{
+    let { _id } = AuthService.getUser()
+    return _id
+  }
 
 
   const handleDeletePost = async (id) => {
@@ -100,7 +103,8 @@ const PostForm = () => {
       title: state.title,
       body: state.body,
       image: state.image,
-      posted: posted
+      posted: posted,
+      user: getUser()
 
     }
 

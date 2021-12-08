@@ -18,6 +18,7 @@ const typeDefs = gql`
     posted: String!
     likedBy: [ID]
     dislikedBy: [ID]
+    user:ID
   }
 
   type User {
@@ -47,7 +48,7 @@ const typeDefs = gql`
   
   type Mutation {
     
-    addPost(title: String!, body: String!, image: String!, posted: String!, likedBy:[ID]): Post!
+    addPost(title: String!, body: String!, image: String!, posted: String!, likedBy:[ID], user: ID!): Post!
 
     updatePost(_id:ID, title: String!, body: String!, image: String!, likedBy:[ID], dislikedBy: [ID]): Post!
 

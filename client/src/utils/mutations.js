@@ -3,8 +3,8 @@ import { gql } from '@apollo/client'
 
 
 export const ADD_POST = gql`
-  mutation addPost( $title: String!, $body: String!, $image: String! , $posted: String!) {
-    addPost(title: $title, body: $body, image: $image, posted: $posted) {
+  mutation addPost( $title: String!, $body: String!, $image: String! , $posted: String!, $user: ID!) {
+    addPost(title: $title, body: $body, image: $image, posted: $posted, user: $user) {
       _id
       title
       body
@@ -12,6 +12,7 @@ export const ADD_POST = gql`
       posted
       likedBy
       dislikedBy
+      user
       
     }
   }

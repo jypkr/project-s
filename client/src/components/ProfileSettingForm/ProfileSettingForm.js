@@ -72,10 +72,10 @@ const ProfileSettingForm = ({state,dispatch}) => {
       })
       console.log(data)
       
-      // dispatch({
-      //   type: 'UPDATE_POST',
-      //   user
-      // })
+      dispatch({
+        type: 'UPDATE_PROFILE',
+        user
+      })
     }
     catch (err) {
       console.error(err)

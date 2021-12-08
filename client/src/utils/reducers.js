@@ -1,3 +1,4 @@
+import { ConstructionOutlined } from '@mui/icons-material'
 import { useReducer } from 'react'
 import { GET_POSTS,GET_USER, ADD_POST, UPDATE_POST, UPDATE_BODY, UPDATE_TITLE, DELETE_POST, UPDATE_IMAGE, GET_USERS, UPDATE_PROFILE, UPDATE_NAME, UPDATE_EMAIL, UPDATE_BIO, UPDATE_PROFILEIMAGE, UPDATE_BACKGROUND } from './action.js'
 export const reducer = (state, action) => {
@@ -60,7 +61,7 @@ export const reducer = (state, action) => {
 
     case UPDATE_PROFILE:
       
-     
+     console.log(action)
       return {
         ...state,
         user: action.user
