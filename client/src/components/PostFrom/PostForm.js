@@ -12,8 +12,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { ConstructionOutlined, SettingsInputAntennaTwoTone } from '@mui/icons-material'
-import { UserInputError } from 'apollo-server-errors'
-
+import AuthService from '../../utils/auth.js'
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -38,6 +37,7 @@ const PostForm = () => {
         type: 'GET_POSTS',
         posts: data.posts
       })
+      console.log(data)
     }
   }, [data])
 
@@ -66,6 +66,10 @@ const PostForm = () => {
     }
   }
 
+  const getUser=()=>{
+    let { _id } = AuthService.getUser()
+    return _id
+  }
 
 
   const handleDeletePost = async (id) => {
@@ -99,7 +103,8 @@ const PostForm = () => {
       title: state.title,
       body: state.body,
       image: state.image,
-      posted: posted
+      posted: posted,
+      user: getUser()
 
     }
 
@@ -123,8 +128,8 @@ const PostForm = () => {
   }
 
   const handleLike = async (_id) => {
-    //Need to get UserId
-    let userID = localStorage.getItem('userId')
+    
+    let userID = getUser()
     let post = {
       _id: _id,
       title: 'title',
@@ -138,11 +143,13 @@ const PostForm = () => {
         post.title = element.title
         post.body = element.body
         post.image = element.image
+        post.dislikedBy = element.dislikedBy
         if (element.likedBy && element.likedBy.length > 0) {
           console.log('length >0')
+
           let duplicate = element.likedBy.filter(temp => temp === userID)
           console.log(duplicate)
-          if (duplicate) {
+          if (duplicate!=0) {
             console.log('already in')
             let array = []
             element.likedBy.forEach(temp => {
@@ -162,7 +169,15 @@ const PostForm = () => {
         let flag = post.dislikedBy.length
         console.log(flag)
         if (flag != 0) {
-          post.dislikedBy = element.disliked.filter(element => element !== userID)
+          let array = []
+          element.dislikedBy.forEach(temp => {
+            if (temp !== userID) {
+              array.push(temp)
+            }
+          });
+
+
+          post.dislikedBy = array
         }
 
       }
@@ -186,8 +201,7 @@ const PostForm = () => {
 
   }
   const handleDislike = async (_id) => {
-    //Need to get UserId
-    let userID = localStorage.getItem('userId')
+    let userID = getUser()
     let post = {
       _id: _id,
       title: 'title',
@@ -201,18 +215,13 @@ const PostForm = () => {
         post.title = element.title
         post.body = element.body
         post.image = element.image
-        //filter out userId from element.likedBy
-
-        let flag = post.likedBy.length
-        console.log(flag)
-        if (flag != 0) {
-          post.likedBy = element.likedBy.filter(element => element !== userID)
-        }
-
+        post.likedBy = element.likedBy
         if (element.dislikedBy && element.dislikedBy.length > 0) {
+          console.log('length >0')
+
           let duplicate = element.dislikedBy.filter(temp => temp === userID)
           console.log(duplicate)
-          if (duplicate) {
+          if (duplicate != 0) {
             console.log('already in')
             let array = []
             element.dislikedBy.forEach(temp => {
@@ -222,10 +231,26 @@ const PostForm = () => {
             });
 
             post.dislikedBy = array
+          } else {
+            post.dislikedBy = [...element.dislikedBy, userID]
           }
 
         } else {
           post.dislikedBy = [userID]
+        }
+
+        let flag = post.likedBy.length
+        console.log(flag)
+        if (flag != 0) {
+          let array = []
+          element.likedBy.forEach(temp => {
+            if (temp !== userID) {
+              array.push(temp)
+            }
+          });
+
+
+          post.likedBy = array
         }
 
       }
@@ -242,7 +267,9 @@ const PostForm = () => {
     }
     catch (err) {
       console.error(err)
+
     }
+
   }
 
   return (

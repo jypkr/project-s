@@ -1,18 +1,20 @@
 import './ProfileSettingForm.css'
 import { useQuery, useMutation } from '@apollo/client'
-import { useState, useEffect } from 'react'
-import { useStoreContext } from '../../utils/GlobalState.js'
-import { QUERY_USER } from '../../utils/queries.js'
+
 import { UPDATE_PROFILE } from '../../utils/mutations'
 import TextField from '@mui/material/TextField'
 
 
 
-const ProfileSettingForm = () => {
-  const [state, dispatch] = useStoreContext()
-  const { loading, data } = useQuery(QUERY_USER)
 
-  const [updateProfile] = useMutation(UPDATE_PROFILE)
+const ProfileSettingForm = ({state,dispatch}) => {
+  
+  const [updateProfile,{error}] = useMutation(UPDATE_PROFILE)
+  
+  if(error){
+    console.log(error)
+  }
+
 
   const handleInputChange = ({ target }) => {
     switch (target.name) {
@@ -56,36 +58,36 @@ const ProfileSettingForm = () => {
 
   const handleChangeProfile = async event => {
     event.preventDefault()
-    console.log(state)
-    const user = {
-      name: state.name,
-      email: state.email,
-      bio: state.bio,
-      profileImage: state.profileImage,
-      background: state.background
-
-    }
-
+    
+    let user = JSON.parse(JSON.stringify(state.user))
+    console.log(user)
+    user.profile.bio = state.bio
+    user.profile.profileImage= state.profileImage
+    user.profile.background = state.background
+    console.log({...user.profile})
+   
     try {
       const { data } = await updateProfile({
-        variables: user
+        variables: {_id:user._id, bio: user.profile.bio, profileImage: user.profile.profileImage, background: user.profile.background}
       })
+      console.log(data)
+      
       dispatch({
         type: 'UPDATE_PROFILE',
         user
       })
-
-      console.log(data)
-
-    } catch (err) {
-      console.error(err)
-      console.log(user)
     }
+    catch (err) {
+      console.error(err)
+
+    }
+
+    
   }
 
   return (
     <>
-      <TextField
+      {/* <TextField
         id="outlined-textarea"
         label="name"
         placeholder="name"
@@ -104,7 +106,7 @@ const ProfileSettingForm = () => {
         onChange={handleInputChange}
 
         multiline
-      />
+      /> */}
       <TextField
         id="outlined-textarea"
         label="bio"
@@ -134,7 +136,7 @@ const ProfileSettingForm = () => {
 
         multiline
       />
-
+      
       <button onClick={handleChangeProfile}>Edit Profile</button>
     </>
   )

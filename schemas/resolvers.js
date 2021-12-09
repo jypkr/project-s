@@ -5,10 +5,20 @@ const { signToken } = require('../utils/auth.js')
 const resolvers = {
   Query: {
     posts: async () => await Post.find({}),
-    post: async (parent, { _id }) => await Post.findById(_id)
+    post: async (parent,  {_id} ) => await Post.findById(_id),
+    users: async () => await User.find({}),
+    user: async (parent, {_id}) =>await User.findById(_id)
   },
   Mutation: {
-    addPost: async (parent, post) => await Post.create(post),
+    addPost: async (parent, post) => {
+      let newPost = await Post.create(post)
+      
+      const user = await User.findOne( newPost.user).populate('posts')
+      user.posts.push(newPost._id)
+      
+      await User.findByIdAndUpdate(user._id, { $set: { posts: user.posts}})
+      return newPost
+    },
 
     updatePost: async (parent, post) => await Post.findByIdAndUpdate(post._id, { $set: { title: post.title, body: post.body, image: post.image, likedBy: post.likedBy, dislikedBy: post.dislikedBy } }),
 
@@ -32,7 +42,15 @@ const resolvers = {
       }
     },
 
-    updateProfile: async (parent, user) => await User.findByIdAndUpdate(user._id, { $set: { profile: user.profile } }),
+    updateProfile: async (_, {_id, bio, profileImage, background}) => {  
+      let profile={
+        bio: bio,
+        profileImage: profileImage,
+        background: background
+      }
+      let user = await User.findByIdAndUpdate(_id, { $set: {profile } })  
+      return user
+    },
 
     sendFriendRequest: async (parent, { sentTo_id, sentBy_id }) => await User.findByIdAndUpdate(sentTo_id, { $push: { friendRequests: user_id, sentBy_id } }),
 

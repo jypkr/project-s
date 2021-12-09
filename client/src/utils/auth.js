@@ -1,6 +1,17 @@
 import decode from 'jwt-decode'
 
 const AuthService = {
+
+  getUser(){
+    try {
+      let token = localStorage.getItem('token')
+      const decoded = decode(token)
+      
+      return decoded
+    } catch (error) {
+      
+    }
+  },
   loggedIn() {
     const token = localStorage.getItem('token')
     return !!token && !this.isTokenExpired(token)
@@ -19,10 +30,6 @@ const AuthService = {
   },
   login(token, user) {
     localStorage.setItem('token', token)
-    localStorage.setItem('name', user.name)
-    localStorage.setItem('email', user.email)
-    localStorage.setItem('profile', user.profile)
-    localStorage.setItem('userId', user._id)
     window.location = "/home"
   },
   logout() {

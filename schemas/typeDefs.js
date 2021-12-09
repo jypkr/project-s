@@ -4,8 +4,9 @@ const typeDefs = gql`
 
   
   type Profile {
-    profileImage: String!
-    background: String!
+    bio: String
+    profileImage: String
+    background: String
   }
   
   type Post {
@@ -17,14 +18,19 @@ const typeDefs = gql`
     posted: String!
     likedBy: [ID]
     dislikedBy: [ID]
+    user:ID
   }
 
   type User {
     _id: ID!
     name: String!
     email: String!
-    profile : Profile!
+    profile : Profile
     posts: [Post!]
+    friends: [ID]
+    friendRequests: [ID]
+    favPosts:[ID]
+
   }
 
   type Auth {
@@ -35,11 +41,14 @@ const typeDefs = gql`
   type Query {
     posts: [Post!]
     post(_id: ID!): Post!
-    user: User!
+    users: [User!]
+    user(_id: ID!): User
+    me: User!
   }
   
   type Mutation {
-    addPost(title: String!, body: String!, image: String!, posted: String!, likedBy:[ID]): Post!
+    
+    addPost(title: String!, body: String!, image: String!, posted: String!, likedBy:[ID], user: ID!): Post!
 
     updatePost(_id:ID, title: String!, body: String!, image: String!, likedBy:[ID], dislikedBy: [ID]): Post!
 
@@ -49,7 +58,7 @@ const typeDefs = gql`
 
     login(email: String!, password: String!): Auth
 
-    updateProfile(bio: String!, profileImage: String!, background: String!): User
+    updateProfile(_id: ID!, bio:String!, profileImage: String!, background: String!): User
 
     sendFriendRequest(sentTo_id: ID!, sentBy_id: ID!): User
 
