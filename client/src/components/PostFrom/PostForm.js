@@ -166,9 +166,10 @@ const PostForm = () => {
         } else {
           post.likedBy = [userID]
         }
-        let flag = post.dislikedBy.length
+        
+        let flag = post.dislikedBy
         console.log(flag)
-        if (flag != 0) {
+        if (flag) {
           let array = []
           element.dislikedBy.forEach(temp => {
             if (temp !== userID) {
@@ -239,9 +240,9 @@ const PostForm = () => {
           post.dislikedBy = [userID]
         }
 
-        let flag = post.likedBy.length
+        let flag = post.likedBy
         console.log(flag)
-        if (flag != 0) {
+        if (flag ) {
           let array = []
           element.likedBy.forEach(temp => {
             if (temp !== userID) {
