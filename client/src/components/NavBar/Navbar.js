@@ -28,12 +28,25 @@ const Navbar = () => {
 						<span className="navSpan">Home</span>
 					</div>
 				</li>
-
 				<li className="navTab">
 					<div onClick={() => history.push('/profile')} className="navLink">
 						<span className="navSpan">Profile</span>
 					</div>
 				</li>
+				<li className="navTab">
+					<div onClick={() => history.push('/messages')} className="navLink">
+						<span className="navSpan">Messages</span>
+					</div>
+				</li>
+
+				<li className="navTab">
+					<div onClick={() => history.push('/friends')} className="navLink">
+						<span className="navSpan">Friends</span>
+					</div>
+				</li>
+
+
+				
 
 
 				<li className="navTab">

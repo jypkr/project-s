@@ -3,13 +3,15 @@
 }
 
 .sideNavbar {
-  /* position: fixed; */
+  position: sticky;
+  
   background-color: #23232e;
   font-size: 19px;
   /* overflow: scroll; */
   /*topby2layers*/
-  z-index: 2;
+  z-index: 1;
   width: max-content;
+  
   transition: all 0.6s ease;
 }
 
@@ -101,12 +103,12 @@
   .sideNavbar {
     top: 0;
     right: 0;
-    width: 5rem;
+    width: 4rem;
     height: 100vh;
   }
 
   .sideNavbar:hover {
-    width: 18rem;
+    width: 14rem;
   }
 
   .sideNavbar:hover .navSpan {
