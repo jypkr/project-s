@@ -44,7 +44,7 @@ const Profile = () => {
     <>
       
       <Box display="flex" flexDirection="row" >
-        <Box flexGrow={0}>
+        <Box flexGrow={1}>
           <Navbar></Navbar>
         </Box>
         <Box display="flex" flexDirection="row" flexGrow={1}>
