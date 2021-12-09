@@ -14,7 +14,7 @@ const Home = () => {
         <Box flexGrow={0}>
           <Navbar></Navbar>
         </Box>
-        <Box display="flex" flexDirection="row" flexGrow={6}>
+        <Box display="flex" flexDirection="row" flexGrow={10}>
           <Box
             display="flex"
             flexDirection="column"
