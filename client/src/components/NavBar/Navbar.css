@@ -3,12 +3,13 @@
 }
 
 .sideNavbar {
-  position: fixed;
+  /* position: fixed; */
   background-color: #23232e;
   font-size: 19px;
   /* overflow: scroll; */
   /*topby2layers*/
   z-index: 2;
+  width: max-content;
   transition: all 0.6s ease;
 }
 
