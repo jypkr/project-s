@@ -13,6 +13,12 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { ConstructionOutlined, SettingsInputAntennaTwoTone } from '@mui/icons-material'
 import AuthService from '../../utils/auth.js'
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import React, { Component, Fragment } from 'react';
+const Input = styled('input')({
+  display: 'none',
+});
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -20,7 +26,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
+const styles = (theme) => ({
+  input: {
+    display: 'none'
+  }
+});
+console.log(Input)
 const PostForm = () => {
   const [state, dispatch] = useStoreContext()
 
@@ -293,7 +304,7 @@ const PostForm = () => {
               spacing={2}
             >
 
-              <TextField
+              {/* <TextField
                 id="outlined-textarea"
                 label="title"
                 placeholder="title"
@@ -302,7 +313,7 @@ const PostForm = () => {
                 onChange={handleInputChange}
 
                 multiline
-              />
+              /> */}
               <TextField
                 id="outlined-textarea"
                 label="body"
@@ -313,6 +324,12 @@ const PostForm = () => {
                 rows={4}
                 multiline
               />
+              <label htmlFor="icon-button-file">
+                <Input accept="image/*" id="icon-button-file" type="file" />
+                <IconButton color="primary" aria-label="upload picture" component="span">
+                  <PhotoCamera />
+                </IconButton>
+              </label>
               <TextField
                 id="outlined-textarea"
                 label="image"
