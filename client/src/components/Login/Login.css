@@ -1,0 +1,16 @@
+.logo {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-family: 'Bakbak One', cursive;
+  font-size: 40px;
+  color: white;
+}
+
+.SignIn {
+  font-size: 25px !important;
+}
