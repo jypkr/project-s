@@ -6,9 +6,9 @@ const User = new Schema({
   email: String,
   password: String,
   profile:{
-    bio: String,
-    profileImage: String,
-    background: String,
+    bio: {type: String, default:'bio'},
+    profileImage: { type: String, default: 'bio' },
+    background: { type: String, default: 'bio' },
   }, 
   posts: [{
     type: Schema.Types.ObjectId,

@@ -14,12 +14,39 @@ export const QUERY_POSTS = gql`
     }
   }
 `
-export const QUERY_USER = gql`
+export const QUERY_USERS = gql`
   query {
-    user {
+    users {
       _id
       name
       email      
     }
   }
 `
+
+export const QUERY_USER = gql`
+  query User($_id:ID!) {
+    user(_id:$_id) {
+      _id
+      name
+      email
+      profile{
+        bio
+        profileImage
+        background
+      }
+      posts{
+        _id
+      }
+      friends
+      friendRequests
+      favPosts
+      
+      
+
+      
+         
+    }
+  }
+`
+

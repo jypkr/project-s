@@ -1,8 +1,10 @@
 import { gql } from '@apollo/client'
 
+
+
 export const ADD_POST = gql`
-  mutation addPost( $title: String!, $body: String!, $image: String!, , $posted: String!) {
-    addPost(title: $title, body: $body, image: $image, posted: $posted) {
+  mutation addPost( $title: String!, $body: String!, $image: String! , $posted: String!, $user: ID!) {
+    addPost(title: $title, body: $body, image: $image, posted: $posted, user: $user) {
       _id
       title
       body
@@ -10,6 +12,7 @@ export const ADD_POST = gql`
       posted
       likedBy
       dislikedBy
+      user
       
     }
   }
@@ -68,6 +71,19 @@ export const REGISTER_USER = gql`
           image
           posted
         }
+      }
+    }
+  }
+`
+
+export const UPDATE_PROFILE = gql`
+  mutation updateProfile($_id: ID!, $bio: String!, $profileImage: String!, $background: String!) {
+    updateProfile(_id: $_id, bio: $bio, profileImage: $profileImage, background: $background) {
+      _id
+      profile{
+        bio
+        profileImage
+        background
       }
     }
   }
