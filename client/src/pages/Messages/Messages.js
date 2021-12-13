@@ -1,20 +1,29 @@
-
-import PostForm from '../../components/PostFrom'
 import Navbar from '../../components/NavBar/Navbar'
+// import { useState, useEffect } from 'react'
+// import { useQuery, useMutation } from '@apollo/client'
+// import { useStoreContext } from '../../utils/GlobalState.js'
+// import AuthService from '../../utils/auth.js'
 import Box from '@mui/material/Box';
-const Home = () => {
- 
 
 
-  
+
+
+
+const Messages = () =>{
+
+
+
+
   return (
-    <>
 
+
+
+    <>
       <Box display="flex" flexDirection="row" >
         <Box flexGrow={0}>
           <Navbar></Navbar>
         </Box>
-        <Box display="flex" flexDirection="row" flexGrow={10}>
+        <Box display="flex" flexDirection="row" flexGrow={6}>
           <Box
             display="flex"
             flexDirection="column"
@@ -27,8 +36,8 @@ const Home = () => {
 
             <div className='pgContent'>
 
-              <h1>The Home Page</h1>
-              <PostForm></PostForm>
+              <h1>Messages Page</h1>
+             
             </div>
 
 
@@ -40,25 +49,19 @@ const Home = () => {
             display="flex"
             flexDirection="column"
             marginLeft='1rem'
-            
+
 
             flexGrow={1}
           >
             <h1>Side Bar</h1>
-
           </Box>
         </Box>
 
       </Box>
-      
 
-
-
-      </>
-
+    </>
   )
-
-
 }
 
-export default Home
+
+export default Messages

@@ -7,6 +7,10 @@ import { QUERY_USER } from '../../utils/queries.js'
 import { useStoreContext } from '../../utils/GlobalState.js'
 import { GET_USER } from '../../utils/action.js'
 import AuthService from '../../utils/auth.js'
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+
+
 
 const Profile = () => {
 
@@ -36,21 +40,44 @@ const Profile = () => {
 
   }, [data])
 
-
-
   return (
     <>
-      <h1>Profile</h1>    
-      <h2>{state.user.name}</h2>
       
-      <ProfileSettingForm
-      state={state}
-      dispatch={dispatch}
-      ></ProfileSettingForm>
+      <Box display="flex" flexDirection="row" >
+        <Box flexGrow={1}>
+          <Navbar></Navbar>
+        </Box>
+        <Box display="flex" flexDirection="row" flexGrow={1}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            marginLeft='1rem'
+            flexGrow={0}
+          >
+
+
+
+            <div className='pgContent'>
+
+            <h1>Profile</h1>
+            <h2>{state.user.name}</h2>
+
+            <ProfileSettingForm
+              state={state}
+              dispatch={dispatch}
+              ></ProfileSettingForm>
+              </div>
+
+
+
+          </Box>
+        </Box>
+       
+      </Box>
 
       {/* <PostForm></PostForm> */}
 
-      <Navbar></Navbar>
+      
     </>
 
   )
