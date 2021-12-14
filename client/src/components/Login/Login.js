@@ -4,9 +4,7 @@ import { LOGIN_USER } from '../../utils/mutations.js'
 import AuthService from '../../utils/auth.js'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import CssBaseLine from '@mui/material/CssBaseline'
@@ -15,7 +13,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import '../Login/Login.css'
+import '../Login/Login.css';
 
 const Login = ({setParentState}) => {
 
@@ -54,70 +52,11 @@ const Login = ({setParentState}) => {
 
   return (
     <>
-      {/* <Container
-        maxWidth="sm"
-        height= '800px'
-      >
-        <Paper elevation={3} >
-          <Stack
-            component="form"
-            spacing={2}
-            noValidate
-            autoComplete="off"
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            padding='1rem'
-          >
-            <Typography variant="h1" component="div" gutterBottom>
-              Login
-            </Typography>
-            <TextField
-              required
-              id="outlined-required"
-              label="Email"
-              value={authState.email}
-              name='email'
-              onChange={handleInputChange}
-              defaultValue=""
-            />
-            <TextField
-              required
-              id="outlined-required"
-              label="Password"
-              value={authState.password}
-              name='password'
-              onChange={handleInputChange}
-              defaultValue=""
-            />
-            <div>
-            <Button
-              variant="contained"
-              size="small"
-              onClick={handleLoginUser}
-              
-            >
-              Login
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-               
-              onClick={()=>setParentState()}
-            >
-              Register
-            </Button>
-          </div>
-          </Stack>
-        </Paper>
-
-
-      </Container> */}
-
       <Grid 
         container 
         component="main"
-        sx={{ height: '100vh' }}>
+        sx={{ height: '100vh' }}
+        >
           <CssBaseLine />
             <Grid 
               className='logo'
@@ -227,7 +166,6 @@ const Login = ({setParentState}) => {
           </Box>
         </Grid>
       </Grid>
-
     </>
   )
 }

@@ -4,10 +4,16 @@ import { REGISTER_USER } from '../../utils/mutations.js'
 import AuthService from '../../utils/auth.js'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
+import Avatar from '@mui/material/Avatar';
+import CssBaseLine from '@mui/material/CssBaseline';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import '../Register/Register.css';
 
 const Register = ({setParentState}) =>{
 
@@ -35,13 +41,9 @@ const Register = ({setParentState}) =>{
     AuthService.login(token, user)
   }
 
-  
-
-
   return (
     <>
-
-      <Container
+      {/* <Container
         maxWidth="sm"
         height='800px'
       >
@@ -106,10 +108,129 @@ const Register = ({setParentState}) =>{
             </div>
           </Stack>
         </Paper>
-
-
-      </Container>
+      </Container> */}
      
+     <Grid
+      container
+      component='main'
+      sx={{ height: '100vh' }}
+      >
+        <CssBaseLine />
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            md={5}
+            component={Paper}
+            elevation={6}
+            square
+            >
+              <Box sx={{
+                my: 8,
+                mx: 4,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: 'info.main' }}>
+                <LockOutlinedIcon />
+              </Avatar>
+                <Typography
+              className='SignIn'
+              component='h1'
+              varient='h5'
+              >
+                Sign Up
+              </Typography>
+                <Box 
+              component='form'
+              noValidate
+              onSubmit={handleRegisterUser}
+              sx={{
+                mt: 1
+              }}
+              >
+                <TextField
+                  margin='normal'
+                  fullWidth
+                  required
+                  id="outlined-required"
+                  label="Name"
+                  value={authState.name}
+                  name='name'
+                  onChange={handleInputChange}
+                  defaultValue=""
+                />
+                <TextField
+                  margin='normal'
+                  fullWidth
+                  required
+                  id="outlined-required"
+                  label="Email"
+                  value={authState.email}
+                  name='email'
+                  onChange={handleInputChange}
+                  defaultValue=""
+                />
+                <TextField
+                  margin='normal'
+                  fullWidth
+                  required
+                  id="outlined-required"
+                  label="Password"
+                  autoComplete='off'
+                  value={authState.password}
+                  name='password'
+                  type='password'
+                  onChange={handleInputChange}
+                  defaultValue=""
+                />
+                <Button
+                  className='registerBtn'
+                  type='submit'
+                  fullWidth
+                  varient='contained'
+                  sx={{
+                    bgcolor: 'info.main',
+                    color: 'white',
+                    mt: 3,
+                    mb: 2
+                  }}
+                >
+                  Register
+                </Button>
+                  <Grid item xs>
+                    <Link 
+                      href='#'
+                      variant='body2'
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-end'
+                      }}
+                      onClick={()=>setParentState()}
+                    >
+                      Already have an Account? Sign In
+                    </Link>
+                  </Grid>
+              </Box>
+            </Box>
+        </Grid>
+         <Grid 
+          className='logo'
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{ bgcolor: 'primary.main',}}
+          >
+            <h1 className='title'>
+              Shitter
+            </h1>
+            <TwitterIcon 
+              sx={{ fontSize: 250, color: 'white' }}/>
+        </Grid>
+     </Grid>
     </>
   )
 }
