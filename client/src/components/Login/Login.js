@@ -187,8 +187,10 @@ const Login = ({setParentState}) => {
                 margin="normal"
                 required
                 fullWidth
+                autoComplete='off'
                 id="outlined-required"
                 label="Password"
+                type='password'
                 name='password'
                 value={authState.password}
                 onChange={handleInputChange}
