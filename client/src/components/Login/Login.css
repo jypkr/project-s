@@ -14,3 +14,14 @@
 .SignIn {
   font-size: 25px !important;
 }
+
+.loginBtn {
+  box-shadow: 5px 5px #8ECAE6;
+}
+
+.loginBtn:hover {
+  color: #8ECAE6;
+  background-color: transparent;
+  border: #8ECAE6 solid 2px;
+  box-shadow: 10px 10px #0288d1;
+}

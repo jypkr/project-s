@@ -194,33 +194,34 @@ const Login = ({setParentState}) => {
                 defaultValue=""
               />
               <Button
-              type='submit'
-              fullWidth
-              varient='contained'
-              sx={{
-                bgcolor: 'info.main',
-                color: 'white',
-                mt: 3,
-                mb: 2
-              }}
+                className='loginBtn'
+                type='submit'
+                fullWidth
+                varient='contained'
+                sx={{
+                  bgcolor: 'info.main',
+                  color: 'white',
+                  mt: 3,
+                  mb: 2
+                }}
               >
                 Sign In
               </Button>
               <Grid item xs>
                 <Link 
-                href='#'
-                variant='body2'
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'flex-end'
-                }}
-                onClick={()=>setParentState()}
+                  href='#'
+                  variant='body2'
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end'
+                  }}
+                  onClick={()=>setParentState()}
                 >
                   Don't Have an Account? Sign Up
                 </Link>
               </Grid>
-                </Box>
-              </Box>
+            </Box>
+          </Box>
         </Grid>
       </Grid>
 
