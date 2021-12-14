@@ -33,7 +33,7 @@ const Login = ({setParentState}) => {
 
   const handleLoginUser = async event => {
     // Need more function for validation
-    if (authState.lEmail === "" || authState.lPassword === "") {
+    if (authState.email === "" || authState.password === "") {
       event.preventDefault()
       alert("enter email or pwd")
     }
@@ -189,6 +189,7 @@ const Login = ({setParentState}) => {
                 fullWidth
                 id="outlined-required"
                 label="Password"
+                name='password'
                 value={authState.password}
                 onChange={handleInputChange}
                 defaultValue=""
